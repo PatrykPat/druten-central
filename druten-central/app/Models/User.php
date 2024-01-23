@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     public function feedbackvragen()
     {
-        return $this->hasMany(Feedbackvragen::class);
+        return $this->hasMany(Feedbackvragen::class, 'user_id');
     }
     use HasApiTokens, HasFactory, Notifiable;
 

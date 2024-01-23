@@ -9,8 +9,8 @@ class Feedbackvragen extends Model
 {
     use HasFactory;
     protected $table = 'Feedbackvragen';
-    public function user()
+    public function gebruiker()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

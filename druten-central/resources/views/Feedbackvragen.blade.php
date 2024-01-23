@@ -12,7 +12,7 @@
     @foreach($vragen as $vraag)
     <form method="POST" action="{{ route('verwerkantwoord') }}">
         @csrf
-        <input type="hidden" name="vraag_id" value="{{$vraag->idVragen}}">
+        <input type="hidden" name="vraag_id" value="{{$vraag->id}}">
 
         <label for="antwoord">{{ $vraag->beschrijving }}</label><br>
         <input type="text" id="antwoord" name="antwoord" required>

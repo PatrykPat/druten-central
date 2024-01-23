@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\models\Feedbackvragen;
 use App\models\UserHasvragen;
+use App\models\User;
 
 class FeedbackvragenController extends Controller
 {
@@ -16,24 +17,29 @@ class FeedbackvragenController extends Controller
     }
     public function verwerkantwoord(Request $request)
     {
-        // Valideer het formulier, indien nodig
         $request->validate([
-            'antwoord' => 'required', // Voeg eventuele andere validatieregels toe
+            'antwoord' => 'required',
         ]);
 
-        // Haal de gebruikersinvoer op
-        $userId = auth()->user()->id; // Haal de huidige gebruikers-ID op
-        $vraagId = $request->input('vraag_id'); // Zorg ervoor dat je de juiste naam gebruikt voor het veld in je formulier
+        $userId = auth()->user()->id;
+        $vraagId = $request->input('vraag_id');
         $antwoord = $request->input('antwoord');
 
-        // Sla het antwoord op in de database
         UserHasVragen::create([
             'User_idUser' => $userId,
             'Vragen_idVragen' => $vraagId,
             'antwoord' => $antwoord,
         ]);
 
-        // Voeg eventuele verdere logica toe, bijvoorbeeld het tonen van een succesbericht
+        $vraag = Feedbackvragen::find($vraagId);
+        $puntenTeVerdienen = $vraag->puntenTeVerdienen;
+
+        $gebruiker = User::find($userId);
+        $huidigePunten = $gebruiker->punten;
+
+        $nieuwePunten = $huidigePunten + $puntenTeVerdienen;
+        $gebruiker->punten = $nieuwePunten;
+        $gebruiker->save();
 
         return redirect()->back()->with('success', 'Antwoord succesvol opgeslagen.');
     }
