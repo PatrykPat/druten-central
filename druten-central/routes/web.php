@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NieuwsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,25 +16,24 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-/* ------------- Admin Route ------------- */
-
-Route::prefix('admin')->group(function (){
-
-Route::get('/login',[AdminController::class, 'Index'])->name('login_from');
-
-Route::post('/login/owner',[AdminController::class, 'Login'])->name('admin.login');
-
-Route::get('/dashboard',[AdminController::class, 'Dashboard'])->name('admin.dashboard')->middleware('admin');
-
-});
-
-
-
-/* ------------- End Admin Route ------------- */
-
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+/* ------------- Nieuws Route ------------- */
+
+Route::get('/nieuws',[NieuwsController::class, 'Index'])
+->middleware(['auth', 'verified'])->name('dashboard');;
+
+Route::middleware(['checkRole:2'])->group(function () {
+Route::get('/nieuws/create',[NieuwsController::class, 'Create'])
+->middleware(['auth', 'verified'])->name('dashboard');});
+Route::post('/newnieuws', [NieuwsController::class, 'store']);
+Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
+Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
+Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');
+
+/* ------------- End Nieuws Route ------------- */
 
 Route::get('/dashboard', function () {
     return view('dashboard');
