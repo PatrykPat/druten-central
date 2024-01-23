@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Nieuws;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Auth;
 
 class NieuwsController extends Controller
@@ -12,6 +13,7 @@ class NieuwsController extends Controller
     // Laat Nieuws pagina zien met Users en Nieuws tabel
     public function Index(){
         $users = User::all();
+        $roles = Role::all();
         $nieuws = Nieuws::all();
         return view('nieuws.nieuws', ['users' => $users],['nieuws' => $nieuws]);
     }

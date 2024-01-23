@@ -8,7 +8,7 @@
     <h4>description: {{$nieuwsitem->beschrijving}}</h4>
     <h4>date: {{$nieuwsitem->datum}}</h4>
     @auth
-        @if (Auth::user()->role_roleid == 2)
+        @role('bedrijf')
             <!-- Edit Form -->
             <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
 
@@ -18,7 +18,7 @@
                 @method('DELETE')
                 <button type="submit" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
             </form>
-        @endif
+        @endrole
     @endauth
 </div>
 @endforeach
