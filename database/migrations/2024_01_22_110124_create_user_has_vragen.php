@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('Vragen_idVragen');
             $table->string('antwoord', 45);
             $table->foreign('User_idUser')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('Vragen_idVragen')->references('idVragen')->on('Feedbackvragen')->onDelete('cascade');
+            $table->foreign('Vragen_idVragen')->references('id')->on('Feedbackvragen')->onDelete('cascade');
 
         });
     }

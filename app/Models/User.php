@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Spatie\Permission\traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    public function feedbackvragen()
+    {
+        return $this->hasMany(Feedbackvragen::class, 'user_id');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +28,9 @@ class User extends Authenticatable
         'password',
         'role_roleid'
     ];
+    
+    protected $guarded = [];
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +50,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }
