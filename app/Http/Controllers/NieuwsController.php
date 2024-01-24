@@ -33,6 +33,7 @@ class NieuwsController extends Controller
             'beschrijving' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'datum' => 'required|date',
+            'postcode' => 'required|string'
         ]);
 
         // Handle file upload
@@ -50,6 +51,7 @@ class NieuwsController extends Controller
             'beschrijving' => $request->input('beschrijving'),
             'image' => $imagePath,
             'datum' => $request->input('datum'),
+            'postcode' => $request->input('postcode'),
         ]);
 
         return redirect('/nieuws')->with('success', 'News item created successfully.');
@@ -58,18 +60,18 @@ class NieuwsController extends Controller
     // Delete een nieuwsitem
     public function destroy($id)
     {
-    $newsItem = Nieuws::findOrFail($id);
-    $newsItem->delete();
+        $newsItem = Nieuws::findOrFail($id);
+        $newsItem->delete();
 
-    return redirect()->back()->with('success', 'News item deleted successfully.');
+        return redirect()->back()->with('success', 'News item deleted successfully.');
     }
 
     // Ga naar de edit pagina voor je nieuwsitem
-    public function edit($id)
-    {
-    $nieuwsitem = Nieuws::findOrFail($id);
-    return view('nieuws.NieuwsEdit', compact('nieuwsitem'));
-    }
+        public function edit($id)
+        {
+            $nieuwsitem = Nieuws::findOrFail($id);
+            return view('nieuws.NieuwsEdit', compact('nieuwsitem'));
+        }
 
     // Verander je nieuwsitem na het invullen van de edit file
     public function update(Request $request, $id)
@@ -79,6 +81,7 @@ class NieuwsController extends Controller
             'beschrijving' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'datum' => 'required|date',
+            'postcode' => 'required|string'
         ]);
 
         // Handle file upload
@@ -98,8 +101,31 @@ class NieuwsController extends Controller
             'beschrijving' => $request->input('beschrijving'),
             'image' => $imagePath,
             'datum' => $request->input('datum'),
+            'postcode' => $request->input('postcode')
         ]);
 
         return redirect('/nieuws')->with('success', 'News item updated successfully.');
+    }
+
+    public function filter(Request $request)
+    {
+        $userId = $request->input('user_id');
+
+        $users = User::all();
+        $roles = Role::all();
+        $nieuws = Nieuws::query();
+
+        // Filter by user if a user is selected
+        if (!empty($userId)) {
+            $nieuws->where('user_iduser', $userId);
+        }
+
+        $filteredNieuws = $nieuws->get();
+
+        return view('nieuws.nieuws', [
+            'users' => $users,
+            'nieuws' => $filteredNieuws,
+            'selectedUserId' => $userId ?? null,
+        ]);
     }
 }

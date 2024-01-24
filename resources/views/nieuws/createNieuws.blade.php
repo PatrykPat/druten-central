@@ -16,5 +16,8 @@
         <label for="datum">Date:</label>
         <input type="date" name="datum" required>
 
+        <label for="postcode">Postcode:</label>
+        <input type="text" name="postcode" required>
+
         <button type="submit">Submit</button>
     </form>
