@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\models\Feedbackvragen;
 use App\models\UserHasvragen;
 use App\models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class FeedbackvragenController extends Controller
 {
     public function show()
     {
         $vragen = Feedbackvragen::all();
-        return view('Feedbackvragen', compact('vragen'));
+        return view('vragen\Feedbackvragen', compact('vragen'));
     }
     public function verwerkantwoord(Request $request)
     {
@@ -41,6 +42,6 @@ class FeedbackvragenController extends Controller
         $gebruiker->punten = $nieuwePunten;
         $gebruiker->save();
 
-        return redirect()->back()->with('success', 'Antwoord succesvol opgeslagen.');
+        return Redirect::to('/');
     }
 }

@@ -8,24 +8,25 @@
     <h4>description: {{$nieuwsitem->beschrijving}}</h4>
     <h4>date: {{$nieuwsitem->datum}}</h4>
     @auth
-        @role('bedrijf')
-            <!-- Edit Form -->
-            <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
+    @role('bedrijf')
+    <!-- Edit Form -->
+    <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
 
-            <!-- Delete Form -->
-            <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
-            </form>
-        @endrole
+    <!-- Delete Form -->
+    <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit"
+            onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
+    </form>
+    @endrole
     @endauth
 </div>
 @endforeach
 
 <!-- Link naar create form -->
 @auth
-    @if(Auth::user()->role_roleid == 2)
-        <h3><a href="/nieuws/create">Create</a></h3>
-    @endif
+@role('bedrijf')
+<h3><a href="/nieuws/create">Create</a></h3>
+@endrole
 @endauth

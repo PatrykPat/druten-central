@@ -11,15 +11,16 @@ use Auth;
 class NieuwsController extends Controller
 {
     // Laat Nieuws pagina zien met Users en Nieuws tabel
-    public function Index(){
+    public function Index()
+    {
         $users = User::all();
-        $roles = Role::all();
         $nieuws = Nieuws::all();
-        return view('nieuws.nieuws', ['users' => $users],['nieuws' => $nieuws]);
+        return view('nieuws.nieuws', ['users' => $users], ['nieuws' => $nieuws]);
     }
 
     // Ga naar pagina voor het creëren van nieuws
-    public function Create(){
+    public function Create()
+    {
         return view('nieuws.createNieuws');
     }
 
@@ -58,17 +59,17 @@ class NieuwsController extends Controller
     // Delete een nieuwsitem
     public function destroy($id)
     {
-    $newsItem = Nieuws::findOrFail($id);
-    $newsItem->delete();
+        $newsItem = Nieuws::findOrFail($id);
+        $newsItem->delete();
 
-    return redirect()->back()->with('success', 'News item deleted successfully.');
+        return redirect()->back()->with('success', 'News item deleted successfully.');
     }
 
     // Ga naar de edit pagina voor je nieuwsitem
     public function edit($id)
     {
-    $nieuwsitem = Nieuws::findOrFail($id);
-    return view('nieuws.NieuwsEdit', compact('nieuwsitem'));
+        $nieuwsitem = Nieuws::findOrFail($id);
+        return view('nieuws.NieuwsEdit', compact('nieuwsitem'));
     }
 
     // Verander je nieuwsitem na het invullen van de edit file
