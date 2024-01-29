@@ -26,7 +26,9 @@
                     <x-nav-link :href="route('meerkeuzevragen.show')" :active="request()->routeIs('meerkeuzevragen')">
                         {{ __('meerkeuzevragen') }}
                     </x-nav-link>
-
+                    <x-nav-link :href="route('aantalvragen')" :active="request()->routeIs('aantalvragen')">
+                        {{ __('aantalvragen') }}
+                    </x-nav-link>
                 </div>
             </div>
 

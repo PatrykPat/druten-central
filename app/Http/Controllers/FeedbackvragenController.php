@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class FeedbackvragenController extends Controller
 {
+    //laat feedbackvragen.blade.php zien
     public function show()
     {
         $vragen = Feedbackvragen::all();
         return view('vragen\Feedbackvragen', compact('vragen'));
     }
+    //deze funcite verwerkt alle informatie naar de database
     public function verwerkantwoord(Request $request)
     {
         $request->validate([
@@ -34,10 +36,10 @@ class FeedbackvragenController extends Controller
 
         $vraag = Feedbackvragen::find($vraagId);
         $puntenTeVerdienen = $vraag->puntenTeVerdienen;
-
+        //zoekt het id van de gebruiker op
         $gebruiker = User::find($userId);
         $huidigePunten = $gebruiker->punten;
-
+        //telt de huidige punten op met de verdiende punten
         $nieuwePunten = $huidigePunten + $puntenTeVerdienen;
         $gebruiker->punten = $nieuwePunten;
         $gebruiker->save();

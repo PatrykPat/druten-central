@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Aantalvragen;
+use App\Http\Controllers\Aantalvragenconroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\Meerkeuzevragencontroller;
-
+use App\Http\Controllers\AantalvragenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +69,11 @@ Route::middleware('auth')->group(function () {
     Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show']);
     Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
+    // routes\web.php
+    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen']);
+    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
+
+
 });
 
 require __DIR__ . '/auth.php';

@@ -13,4 +13,8 @@ class Feedbackvragen extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function gebruikers()
+    {
+        return $this->hasMany(UserHasVragen::class, 'Vragen_idVragen', 'id');
+    }
 }
