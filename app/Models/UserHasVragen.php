@@ -12,5 +12,8 @@ class UserHasVragen extends Model
     protected $fillable = ['User_idUser', 'Vragen_idVragen', 'antwoord','rating'];
 
     public $timestamps = false;
-
+    public function gebruiker()
+    {
+        return $this->belongsTo(User::class, 'User_idUser', 'id');
+    }
 }

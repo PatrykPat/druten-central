@@ -11,15 +11,16 @@ use Auth;
 class NieuwsController extends Controller
 {
     // Laat Nieuws pagina zien met Users en Nieuws tabel
-    public function Index(){
+    public function Index()
+    {
         $users = User::all();
-        $roles = Role::all();
         $nieuws = Nieuws::all();
-        return view('nieuws.nieuws', ['users' => $users],['nieuws' => $nieuws]);
+        return view('nieuws.nieuws', ['users' => $users], ['nieuws' => $nieuws]);
     }
 
     // Ga naar pagina voor het creëren van nieuws
-    public function Create(){
+    public function Create()
+    {
         return view('nieuws.createNieuws');
     }
 

@@ -1,14 +1,19 @@
 <?php
 
+use App\Http\Controllers\Aantalvragen;
+use App\Http\Controllers\Aantalvragenconroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FeedbackvragenController;
+use App\Models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NieuwsController;
+use App\Http\Controllers\Meerkeuzevragencontroller;
+use App\Http\Controllers\AantalvragenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,11 +52,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function(){
- Route::get('/', [IndexController::class,'index'])->name('index');
- Route::resource('/roles', RoleController::class);
- Route::resource('/permissions', PermissionController::class);
- Route::resource('/users', UserController::class);
+Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/', [IndexController::class, 'index'])->name('index');
+    Route::resource('/roles', RoleController::class);
+    Route::resource('/permissions', PermissionController::class);
+    Route::resource('/users', UserController::class);
 });
 
 
@@ -62,6 +67,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show']);
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt']);
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
+    Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show'])->name('feedbackvragen.show');
+    Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show']);
+    Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
+    Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
+    // routes\web.php
+    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen']);
+    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
+
+
 });
 
 require __DIR__ . '/auth.php';
