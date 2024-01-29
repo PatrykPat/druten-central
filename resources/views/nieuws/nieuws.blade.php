@@ -25,7 +25,7 @@
 
 <!-- Link naar create form -->
 @auth
-    @if(Auth::user()->role_roleid == 2)
+    @role('bedrijf')
         <h3><a href="/nieuws/create">Create</a></h3>
-    @endif
+    @endrole
 @endauth

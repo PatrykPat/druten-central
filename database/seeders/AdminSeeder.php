@@ -21,6 +21,7 @@ class AdminSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'postcode' => '4007 HA'
         ])->assignRole('admin');
         
         User::create([
@@ -28,6 +29,7 @@ class AdminSeeder extends Seeder
             'email' => 'bedrijf@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'postcode' => '4005 HA'
         ])->assignRole('bedrijf');
 
         User::create([
@@ -35,6 +37,7 @@ class AdminSeeder extends Seeder
             'email' => 'user@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'postcode' => '4006 HA'
         ])->assignRole('user');
     }
 }

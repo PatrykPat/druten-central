@@ -42,6 +42,7 @@ return array(
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
     'App\\Models\\AddUser' => $baseDir . '/app/Models/AddUser.php',
+    'App\\Models\\FeedbackAntwoorden' => $baseDir . '/app/Models/FeedbackAntwoorden.php',
     'App\\Models\\Feedbackvragen' => $baseDir . '/app/Models/Feedbackvragen.php',
     'App\\Models\\Nieuws' => $baseDir . '/app/Models/Nieuws.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

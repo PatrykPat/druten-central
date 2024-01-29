@@ -9,7 +9,7 @@ class UserHasVragen extends Model
 {
     use HasFactory;
     protected $table = 'UserHasVragen';
-    protected $fillable = ['User_idUser', 'Vragen_idVragen', 'antwoord'];
+    protected $fillable = ['User_idUser', 'Vragen_idVragen', 'antwoord','rating'];
 
     public $timestamps = false;
 

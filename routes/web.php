@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show']);
+    Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt']);
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
 });
 

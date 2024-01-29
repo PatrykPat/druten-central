@@ -20,6 +20,10 @@
             </div>
         </div>
         <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                <!-- User information display -->
+                <p class="text-sm leading-6 text-gray-900">post code: {{ $user->postcode}} </p></br>
+            </div>
+        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
             @if ($user->roles->isNotEmpty())
                 @foreach ($user->roles as $role)
                     <!-- Loop over roles for the current user -->
@@ -29,10 +33,6 @@
                 <p class="text-sm leading-6 text-gray-900">No roles assigned</p>
             @endif
         </div>
-        <td>
-            <a href="#">edit</a>
-            <a href="#">delete</a>
-        </td>
     </li>
 @endforeach
                 

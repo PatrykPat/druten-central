@@ -16,6 +16,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Feedbackvragen::class, 'user_id');
     }
+    public function feedbackantwoorden()
+    {
+        return $this->hasMany(feedbackantwoorden::class, 'user_id');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +30,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_roleid'
+        'role_roleid',
+        'postcode'
     ];
     
     protected $guarded = [];

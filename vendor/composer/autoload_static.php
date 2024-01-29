@@ -584,6 +584,7 @@ class ComposerStaticInite44cd94cd6c4a027c84ed6b50816af13
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Models\\AddUser' => __DIR__ . '/../..' . '/app/Models/AddUser.php',
+        'App\\Models\\FeedbackAntwoorden' => __DIR__ . '/../..' . '/app/Models/FeedbackAntwoorden.php',
         'App\\Models\\Feedbackvragen' => __DIR__ . '/../..' . '/app/Models/Feedbackvragen.php',
         'App\\Models\\Nieuws' => __DIR__ . '/../..' . '/app/Models/Nieuws.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
