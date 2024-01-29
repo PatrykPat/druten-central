@@ -36,7 +36,7 @@ class NieuwsController extends Controller
             'postcode' => 'required|string'
         ]);
 
-        // Handle file upload
+        // File upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagePath = $image->store('images', 'public');
@@ -44,9 +44,9 @@ class NieuwsController extends Controller
             $imagePath = null;
         }
 
-        // Create news item
+        // Create nieuws item
         Nieuws::create([
-            'user_iduser' => Auth::user()->id, // assuming you have authentication
+            'user_iduser' => Auth::user()->id, 
             'title' => $request->input('title'),
             'beschrijving' => $request->input('beschrijving'),
             'image' => $imagePath,
@@ -84,7 +84,7 @@ class NieuwsController extends Controller
             'postcode' => 'required|string'
         ]);
 
-        // Handle file upload
+        // File upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagePath = $image->store('images', 'public');
@@ -92,7 +92,7 @@ class NieuwsController extends Controller
             $imagePath = null;
         }
 
-        // Find the nieuwsitem to update
+        // Vind het nieuwsitem die geupdate moet worden
         $nieuwsitem = Nieuws::findOrFail($id);
 
         // Update nieuwsitem
@@ -115,7 +115,7 @@ class NieuwsController extends Controller
         $roles = Role::all();
         $nieuws = Nieuws::query();
 
-        // Filter by user if a user is selected
+        // Filter per user als een user geselecteerd is
         if (!empty($userId)) {
             $nieuws->where('user_iduser', $userId);
         }
