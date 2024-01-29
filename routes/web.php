@@ -27,16 +27,19 @@ Route::get('/', function () {
 
 /* ------------- Nieuws Route ------------- */
 
-Route::get('/nieuws',[NieuwsController::class, 'Index'])
-->middleware(['auth', 'verified'])->name('dashboard');;
+// Deze Routes zijn bereikbaar als je ingelogd bent
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/nieuws',[NieuwsController::class, 'Index'])
+    ->name('nieuws');});
+    Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
 
+// Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-Route::get('/nieuws/create',[NieuwsController::class, 'Create'])
-->middleware(['auth', 'verified'])->name('dashboard');});
+Route::get('/nieuws/create',[NieuwsController::class, 'Create']);
 Route::post('/newnieuws', [NieuwsController::class, 'store']);
 Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
 Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
-Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');
+Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');});
 
 /* ------------- End Nieuws Route ------------- */
 

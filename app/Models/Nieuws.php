@@ -13,5 +13,5 @@ class Nieuws extends Model
 
     protected $table = 'nieuws';
 
-    protected $fillable = ['user_iduser', 'title', 'beschrijving', 'image', 'datum'];
+    protected $fillable = ['user_iduser', 'title', 'beschrijving', 'image', 'datum','postcode'];
 }

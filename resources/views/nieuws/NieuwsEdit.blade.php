@@ -18,5 +18,8 @@
     <label for="datum">Date:</label>
     <input type="date" name="datum" value="{{ old('datum', $nieuwsitem->datum) }}" required>
 
+    <label for="postcode">Postcode:</label>
+    <input type="text" name="postcode" value="{{ old('postcode', $nieuwsitem->postcode) }}" required>
+
     <button type="submit">Update</button>
 </form>
