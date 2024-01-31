@@ -17,7 +17,7 @@ class NieuwsController extends Controller
         $roles = Role::all();
         $nieuws = Nieuws::with('gebruiker')->where('datum', '<', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
         $users = User::all();
-        return view('nieuws.nieuws',compact('nieuws', 'users', 'selectedUserId'), ['users' => $users], ['nieuws' => $nieuws]);
+        return view('nieuws.nieuws',compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
     }
 
     public function Agenda() {
