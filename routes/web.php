@@ -37,6 +37,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/nieuws',[NieuwsController::class, 'Index'])
     ->name('nieuws');});
     Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
+    Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
+    Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {

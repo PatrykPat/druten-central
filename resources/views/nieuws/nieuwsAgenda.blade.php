@@ -1,15 +1,12 @@
 <x-app-layout>
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Nieuws') }}
+        {{ __('Agenda') }}
     </h2>
 </x-slot>
+<h1>Aankomende nieuws berichten:</h1>
 
-<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-<h1> Nieuws: </h1>
-
-<!-- Dropdown form om nieuwsitems te filteren -->
-<form id="filterForm" action="{{ route('nieuws.filter') }}" method="GET">
+<form id="filterForm" action="{{ route('nieuws.filteragenda') }}" method="GET">
     @csrf
     <label for="userFilter">Select User:</label>
     <select id="userFilter" name="user_postcode">
@@ -27,14 +24,6 @@
     </select>
 </form>
 
-<script>
-    // Filter met javascript automatisch
-    document.getElementById('userFilter').addEventListener('change', function() {
-        document.getElementById('filterForm').submit();
-    });
-</script>
-
-<!-- foreach van alle nieuwsitems -->
 @foreach ($nieuws as $nieuwsitem)
 <div class="nieuwsitembox">
     <h3>user: {{$nieuwsitem->user_iduser}}</h3>

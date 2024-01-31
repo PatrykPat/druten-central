@@ -9,6 +9,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Nieuws extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_iduser');
+    }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'nieuws';

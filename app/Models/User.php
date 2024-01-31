@@ -20,6 +20,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(feedbackantwoorden::class, 'user_id');
     }
+    public function nieuws()
+    {
+        return $this->hasMany(Nieuws::class, 'user_id');
+    }
 
     /**
      * The attributes that are mass assignable.
