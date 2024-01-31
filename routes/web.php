@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\Meerkeuzevragencontroller;
 use App\Http\Controllers\AantalvragenController;
+use App\Http\Controllers\CouponController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,7 @@ Route::get('/', function () {
 
 // Deze Routes zijn bereikbaar als je ingelogd bent
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/nieuws',[NieuwsController::class, 'Index'])
-    ->name('nieuws');});
+    Route::get('/nieuws/archief',[NieuwsController::class, 'Index'])->name('nieuws.archief');});
     Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
     Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
     Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
@@ -66,13 +66,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt'])->name('feedbackantwoorden.showAnt');
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
-    Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show'])->name('feedbackvragen.show');
-    Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
     Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
     Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
-
-
 });
+
+/* ------------- Routes alleen voor User ------------- */
+
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show'])->name('feedbackvragen.show');
+    Route::get('/meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
+    Route::get('/coupons', [CouponController::class, 'show'])->name('coupons.show');
+});
+
+/* ------------- End Routes alleen voor User ------------- */
 
 require __DIR__ . '/auth.php';

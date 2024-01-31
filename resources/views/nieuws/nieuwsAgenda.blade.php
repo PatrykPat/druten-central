@@ -24,9 +24,20 @@
     </select>
 </form>
 
+<script>
+        // Filter met javascript automatisch
+        document.getElementById('userFilter').addEventListener('change', function () {
+            document.getElementById('filterForm').submit();
+        });
+</script>
+
 @foreach ($nieuws as $nieuwsitem)
 <div class="nieuwsitembox">
-    <h3>user: {{$nieuwsitem->user_iduser}}</h3>
+    <h3>user: @if ($nieuwsitem->gebruiker)
+            {{ $nieuwsitem->gebruiker->name }}
+            @else
+            Geen gebruiker gevonden
+            @endif</h3>
     <h3>title: {{$nieuwsitem->title}}</h3>
     <h4>description: {{$nieuwsitem->beschrijving}}</h4>
     <h4>date: {{$nieuwsitem->datum}}</h4>
@@ -45,7 +56,7 @@
     </form>
     @endrole
     @endauth
-</div>
+</div><br>
 @endforeach
 
 <!-- Link naar create form -->

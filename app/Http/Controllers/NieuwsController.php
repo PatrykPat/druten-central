@@ -17,15 +17,14 @@ class NieuwsController extends Controller
         $roles = Role::all();
         $nieuws = Nieuws::with('gebruiker')->where('datum', '<', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
         $users = User::all();
-        return view('nieuws.nieuws',compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
+        return view('nieuws.nieuwsArchief',compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
     }
 
     public function Agenda() {
         $users = User::all();
     
-        // Get nieuwsitems with date later than today
-        $nieuws = Nieuws::where('datum', '>=', date('Y-m-d'))
-                       ->get();
+        // Krijg nieuwsitems van vandaag of later dan vandaag
+        $nieuws = Nieuws::with('gebruiker')->where('datum', '>=', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
     
         return view('nieuws.nieuwsAgenda', ['users' => $users, 'nieuws' => $nieuws]);
     }
@@ -138,7 +137,7 @@ class NieuwsController extends Controller
 
         $filteredNieuws = $nieuws->get();
 
-        return view('nieuws.nieuws', [
+        return view('nieuws.nieuwsArchief', [
             'users' => $users,
             'nieuws' => $filteredNieuws,
             'selectedUserPostcode' => $userPostcode ?? null,
@@ -163,7 +162,7 @@ class NieuwsController extends Controller
 
         $filteredNieuws = $nieuws->get();
 
-        return view('nieuws.agenda', [
+        return view('nieuws.nieuwsAgenda', [
             'users' => $users,
             'nieuws' => $filteredNieuws,
             'selectedUserPostcode' => $userPostcode ?? null,

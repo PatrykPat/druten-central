@@ -15,8 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('nieuws')" :active="request()->routeIs('nieuws')">
+                    <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
                         {{ __('Archief') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('nieuws.agenda')" :active="request()->routeIs('nieuws.agenda')">
+                        {{ __('Agenda') }}
                     </x-nav-link>
                     @role('admin')
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
@@ -58,7 +61,7 @@
                         <x-dropdown-link>
                         Aantal punten:{{Auth::user()->punten}}
                         </x-dropdown>
-                        <x-dropdown-link :href="route('nieuws')">
+                        <x-dropdown-link :href="route('coupons.show')">
                             {{ __('Coupons') }}
                         </x-dropdown-link>
 

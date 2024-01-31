@@ -18,6 +18,6 @@ class CheckRole
         }
 
         // Redirect to a different URL if the user doesn't have the correct role
-        return redirect('/nieuws');
+        return redirect('/');
     }
 }
