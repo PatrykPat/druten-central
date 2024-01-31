@@ -47,7 +47,7 @@ class NieuwsController extends Controller
 
         // Create nieuws item
         Nieuws::create([
-            'user_iduser' => Auth::user()->id, 
+            'user_iduser' => Auth::user()->id,
             'title' => $request->input('title'),
             'beschrijving' => $request->input('beschrijving'),
             'image' => $imagePath,
@@ -68,11 +68,11 @@ class NieuwsController extends Controller
     }
 
     // Ga naar de edit pagina voor je nieuwsitem
-        public function edit($id)
-        {
-            $nieuwsitem = Nieuws::findOrFail($id);
-            return view('nieuws.NieuwsEdit', compact('nieuwsitem'));
-        }
+    public function edit($id)
+    {
+        $nieuwsitem = Nieuws::findOrFail($id);
+        return view('nieuws.NieuwsEdit', compact('nieuwsitem'));
+    }
 
     // Verander je nieuwsitem na het invullen van de edit file
     public function update(Request $request, $id)
@@ -114,19 +114,13 @@ class NieuwsController extends Controller
 
         $users = User::all();
         $roles = Role::all();
-        $nieuws = Nieuws::query();
+        $nieuws = Nieuws::with('gebruiker')->get(); // gebruik 'with' om eager loading te doen
 
-        // Filter per user als een user geselecteerd is
+        // Filter per gebruiker als een gebruiker is geselecteerd
         if (!empty($userId)) {
-            $nieuws->where('user_iduser', $userId);
+            $nieuws = $nieuws->where('user_iduser', $userId);
         }
 
-        $filteredNieuws = $nieuws->get();
-
-        return view('nieuws.nieuws', [
-            'users' => $users,
-            'nieuws' => $filteredNieuws,
-            'selectedUserId' => $userId ?? null,
-        ]);
+        return view('nieuws.nieuws', compact('nieuws', 'users', 'selectedUserId'));
     }
 }

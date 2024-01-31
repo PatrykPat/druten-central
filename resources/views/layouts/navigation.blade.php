@@ -26,7 +26,8 @@
                     <x-nav-link :href="route('feedbackvragen.show')" :active="request()->routeIs('feedbackvragen')">
                         {{ __('feedbackvragen') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('feedbackantwoorden.showAnt')" :active="request()->routeIs('feedbackantwoorden')">
+                    <x-nav-link :href="route('feedbackantwoorden.showAnt')"
+                        :active="request()->routeIs('feedbackantwoorden')">
                         {{ __('feedbackantwoorden') }}
                     </x-nav-link>
                     <x-nav-link :href="route('meerkeuzevragen.show')" :active="request()->routeIs('meerkeuzevragen')">
