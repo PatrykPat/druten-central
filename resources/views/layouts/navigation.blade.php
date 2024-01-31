@@ -13,28 +13,21 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('nieuws')" :active="request()->routeIs('nieuws')">
-                        {{ __('nieuws') }}
+                        {{ __('Archief') }}
                     </x-nav-link>
                     @role('admin')
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
                         {{ __('Admin') }}
                     </x-nav-link>
                     @endrole
-                    <x-nav-link :href="route('feedbackvragen.show')" :active="request()->routeIs('feedbackvragen')">
-                        {{ __('feedbackvragen') }}
+                    <x-nav-link :href="route('meer-vragen')" :active="request()->routeIs('meer-vragen')">
+                        {{ __('Meer vragen') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('feedbackantwoorden.showAnt')" :active="request()->routeIs('feedbackantwoorden')">
-                        {{ __('feedbackantwoorden') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('meerkeuzevragen.show')" :active="request()->routeIs('meerkeuzevragen')">
-                        {{ __('meerkeuzevragen') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('aantalvragen')" :active="request()->routeIs('aantalvragen')">
-                        {{ __('aantalvragen') }}
-                    </x-nav-link>
+
+                    <!-- weghalen van andere menu items -->
                 </div>
             </div>
 
@@ -44,7 +37,8 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->name }}</div><br>
+                            <div>{{ Auth::user()->id }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +54,12 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link>
+                        Aantal punten:{{Auth::user()->punten}}
+                        </x-dropdown>
+                        <x-dropdown-link :href="route('nieuws')">
+                            {{ __('Coupons') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

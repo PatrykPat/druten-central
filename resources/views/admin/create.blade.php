@@ -1,17 +1,17 @@
-<x-admin-layout>
+<x-app-layout>
     
 
     <div class="py-12 w-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex p-2">
-                    <a href="{{ route('admin.users.index')}}" class="px-4 py-2 bg-red-500 test-slate-100 hover:bg-red-500 rounded-md">roles</a>
+                    <a href="{{ route('admin.index')}}" class="px-4 py-2 bg-red-500 test-slate-100 hover:bg-red-500 rounded-md">Alle Users</a>
                 </div>
                 <div class="p-6 text-gray-900">
                     <ul role="list" class="divide-y divide-gray-100">
                 </div>
                 <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-  <form method="POST" action="{{ route('admin.users.store')}}">
+  <form method="POST" action="{{ route('admin.store')}}">
     @csrf
     <div class="sm:col-span-6">
       <label for="name" class="block text-sm font-medium text-gray-700"> naam: </label>

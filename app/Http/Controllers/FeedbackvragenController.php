@@ -8,6 +8,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Models\User;
 use App\models\UserHasvragen;
 use App\models\Feedbackvragen;
+use App\models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Redirect;
 
 class FeedbackvragenController extends Controller
@@ -20,6 +21,16 @@ class FeedbackvragenController extends Controller
     
     // Geef de feedbackvragen door aan de view 'Feedbackvragen'
     return view('vragen\Feedbackvragen', compact('vragen'));
+}
+public function showAlleVragen()
+{
+    // Haal alle feedbackvragen op uit de database
+    $vragen = Feedbackvragen::all();
+    // $meerkeuzevragen = Meerkeuzevragen::all();
+
+    
+    // Geef de feedbackvragen door aan de view 'Feedbackvragen'
+    return view('vragen\meer-vragen', compact('vragen'));
 }
 
 public function showAnt()

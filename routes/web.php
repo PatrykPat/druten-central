@@ -48,15 +48,13 @@ Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuw
 
 /* ------------- End Nieuws Route ------------- */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/', [IndexController::class, 'index'])->name('index');
+    Route::resource('/', UserController::class);
     Route::resource('/roles', RoleController::class);
     Route::resource('/permissions', PermissionController::class);
-    Route::resource('/users', UserController::class);
+    
 });
 
 
@@ -67,11 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt'])->name('feedbackantwoorden.showAnt');
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
     Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show'])->name('feedbackvragen.show');
-    Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show']);
     Route::get('meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
+    Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
-    // routes\web.php
-    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen']);
     Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 
 

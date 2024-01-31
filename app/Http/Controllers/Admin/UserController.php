@@ -17,7 +17,7 @@ class UserController extends Controller
         $roles = Role::all();
         
         // Geef de gebruikers en rollen door aan de view 'admin.users.index'
-        return view('admin.users.index', compact('users', 'roles'));
+        return view('admin.index', compact('users', 'roles'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class UserController extends Controller
         $roles = Role::all();
         
         // Geef de rollen door aan de view 'admin.users.create'
-        return view('admin.users.create', compact('roles'));
+        return view('admin.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -55,6 +55,6 @@ class UserController extends Controller
         $user->syncRoles([$role]);
 
         // Redirect naar de gebruikersindexpagina
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.index');
     }
 }
