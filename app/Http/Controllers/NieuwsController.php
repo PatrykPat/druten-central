@@ -14,8 +14,19 @@ class NieuwsController extends Controller
     public function Index()
     {
         $users = User::all();
-        $nieuws = Nieuws::all();
+        $nieuws = Nieuws::where('datum', '<', date('Y-m-d'))
+                       ->get();
         return view('nieuws.nieuws', ['users' => $users], ['nieuws' => $nieuws]);
+    }
+
+    public function Agenda() {
+        $users = User::all();
+    
+        // Get nieuwsitems with date later than today
+        $nieuws = Nieuws::where('datum', '>=', date('Y-m-d'))
+                       ->get();
+    
+        return view('nieuws.nieuwsAgenda', ['users' => $users, 'nieuws' => $nieuws]);
     }
 
     // Ga naar pagina voor het creëren van nieuws
@@ -110,23 +121,51 @@ class NieuwsController extends Controller
 
     public function filter(Request $request)
     {
-        $userId = $request->input('user_id');
+        $userPostcode = $request->input('user_postcode');
 
         $users = User::all();
-        $roles = Role::all();
         $nieuws = Nieuws::query();
 
         // Filter per user als een user geselecteerd is
-        if (!empty($userId)) {
-            $nieuws->where('user_iduser', $userId);
+        if (!empty($userPostcode)) {
+            $nieuws->whereHas('user', function ($query) use ($userPostcode) {
+                $query->where('postcode', $userPostcode);
+            });
         }
+
+        $nieuws->whereDate('datum', '<', date('Y-m-d'));
 
         $filteredNieuws = $nieuws->get();
 
         return view('nieuws.nieuws', [
             'users' => $users,
             'nieuws' => $filteredNieuws,
-            'selectedUserId' => $userId ?? null,
+            'selectedUserPostcode' => $userPostcode ?? null,
+        ]);
+    }
+
+    public function filterAgenda(Request $request)
+    {
+        $userPostcode = $request->input('user_postcode');
+
+        $users = User::all();
+        $nieuws = Nieuws::query();
+
+        // Filter per user als een user geselecteerd is
+        if (!empty($userPostcode)) {
+            $nieuws->whereHas('user', function ($query) use ($userPostcode) {
+                $query->where('postcode', $userPostcode);
+            });
+        }
+
+        $nieuws->whereDate('datum', '>=', date('Y-m-d'));
+
+        $filteredNieuws = $nieuws->get();
+
+        return view('nieuws.agenda', [
+            'users' => $users,
+            'nieuws' => $filteredNieuws,
+            'selectedUserPostcode' => $userPostcode ?? null,
         ]);
     }
 }
