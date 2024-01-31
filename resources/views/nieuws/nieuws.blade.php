@@ -5,8 +5,8 @@
     </h2>
 </x-slot>
 
-<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-<h1> Nieuws: </h1>
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <h1> Nieuws: </h1>
 
 <!-- Dropdown form om nieuwsitems te filteren -->
 <form id="filterForm" action="{{ route('nieuws.filter') }}" method="GET">
@@ -23,46 +23,50 @@
                     </option>
                 @endif
             @endforeach
-        @endforeach
-    </select>
-</form>
+            @endforeach
+        </select>
+    </form>
 
-<script>
-    // Filter met javascript automatisch
-    document.getElementById('userFilter').addEventListener('change', function() {
-        document.getElementById('filterForm').submit();
-    });
-</script>
+    <script>
+        // Filter met javascript automatisch
+        document.getElementById('userFilter').addEventListener('change', function () {
+            document.getElementById('filterForm').submit();
+        });
+    </script>
 
-<!-- foreach van alle nieuwsitems -->
-@foreach ($nieuws as $nieuwsitem)
-<div class="nieuwsitembox">
-    <h3>user: {{$nieuwsitem->user_iduser}}</h3>
-    <h3>title: {{$nieuwsitem->title}}</h3>
-    <h4>description: {{$nieuwsitem->beschrijving}}</h4>
-    <h4>date: {{$nieuwsitem->datum}}</h4>
-    <h4>postcode: {{$nieuwsitem->postcode}}</h4>
+    <!-- foreach van alle nieuwsitems -->
+    @foreach ($nieuws as $nieuwsitem)
+    <div class="nieuwsitembox">
+        <h3>user: @if ($nieuwsitem->gebruiker)
+            {{ $nieuwsitem->gebruiker->name }}
+            @else
+            Geen gebruiker gevonden
+            @endif</h3>
+        <h3>title: {{$nieuwsitem->title}}</h3>
+        <h4>description: {{$nieuwsitem->beschrijving}}</h4>
+        <h4>date: {{$nieuwsitem->datum}}</h4>
+        <h4>postcode: {{$nieuwsitem->postcode}}</h4>
+        @auth
+        @role('bedrijf')
+        <!-- Edit Form -->
+        <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
+
+        <!-- Delete Form -->
+        <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
+        </form>
+        @endrole
+        @endauth
+    </div><br>
+    @endforeach
+
+    <!-- Link naar create form -->
     @auth
     @role('bedrijf')
-    <!-- Edit Form -->
-    <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
-
-    <!-- Delete Form -->
-    <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit"
-            onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
-    </form>
+    <h3><a href="/nieuws/create">Create</a></h3>
     @endrole
     @endauth
-</div>
-@endforeach
-
-<!-- Link naar create form -->
-@auth
-    @role('bedrijf')
-        <h3><a href="/nieuws/create">Create</a></h3>
-    @endrole
-@endauth
 </x-app-layout>

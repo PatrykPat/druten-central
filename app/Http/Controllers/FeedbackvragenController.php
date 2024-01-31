@@ -28,22 +28,23 @@ public function showAlleVragen()
     $vragen = Feedbackvragen::all();
     // $meerkeuzevragen = Meerkeuzevragen::all();
 
-    
-    // Geef de feedbackvragen door aan de view 'Feedbackvragen'
-    return view('vragen\meer-vragen', compact('vragen'));
-}
 
-public function showAnt()
-{
-    // Haal alle gebruikers, rollen, antwoorden en feedbackvragen op uit de database
-    $users = User::all();
-    $roles = Role::all();
-    $antwoorden = userhasvragen::all();
-    $vragen = Feedbackvragen::all();
-    
-    // Geef de gebruikers, feedbackvragen en antwoorden door aan de view 'Feedbackantwoorden'
-    return view('Feedbackantwoorden', compact('users', 'vragen', 'antwoorden'));
-}
+
+        // Geef de feedbackvragen door aan de view 'Feedbackvragen'
+        return view('vragen\Feedbackvragen', compact('vragen'));
+    }
+
+    public function showAnt()
+    {
+        // Haal alle gebruikers, rollen, antwoorden en feedbackvragen op uit de database
+        $users = User::all();
+        $roles = Role::all();
+        $antwoorden = UserHasVragen::with('gebruiker')->get(); // gebruik 'with' om eager loading te doen
+        $vragen = Feedbackvragen::all();
+
+        // Geef de gebruikers, feedbackvragen en antwoorden door aan de view 'Feedbackantwoorden'
+        return view('Feedbackantwoorden', compact('users', 'vragen', 'antwoorden'));
+    }
 
     public function verwerkantwoord(Request $request)
     {
