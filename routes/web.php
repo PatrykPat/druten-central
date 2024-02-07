@@ -33,7 +33,7 @@ Route::get('/', function () {
 /* ------------- Nieuws Route ------------- */
 
 // Deze Routes zijn bereikbaar als je ingelogd bent
-Route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth', 'verified',  'role:user'])->group(function(){
     Route::get('/nieuws',[NieuwsController::class, 'Index'])
     ->name('nieuws');});
     Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-Route::get('/nieuws/create',[NieuwsController::class, 'Create']);
+Route::get('/nieuws/create',[NieuwsController::class, 'Create'])->name('nieuws.create');
 Route::post('/newnieuws', [NieuwsController::class, 'store']);
 Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
 Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');

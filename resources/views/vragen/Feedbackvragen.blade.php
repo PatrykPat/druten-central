@@ -13,7 +13,6 @@
                 <!-- Een formulier voor het verwerken van het antwoord -->
                 <form method="POST" action="{{ route('verwerkantwoord') }}">
                     @csrf
-                    <!-- Cross-Site Request Forgery-beveiligingstoken -->
 
                     <!-- Verborgen veld om de vraag-ID door te geven -->
                     <input type="hidden" name="vraag_id" value="{{ $vraag->id }}">
@@ -26,7 +25,7 @@
 
                     <!-- Een schuifregelaar voor het beoordelen van de vraag -->
                     <div class="slidecontainer">
-                        <p>Standaard bereikschuifregelaar:</p>
+                        <p>Negatief</p><p>Positief</p>
                         <input type="range" id="rating" name="rating" required min="1" max="10" value="10"
                             oninput="updateHiddenField(this.value)">
 

@@ -1,3 +1,4 @@
+<x-app-layout>
 <!-- Form voor het creëren van nieuwsitems -->
 <h1> Create Test </h1>
 
@@ -21,3 +22,4 @@
 
         <button type="submit">Submit</button>
     </form>
+    </x-app-layout>
