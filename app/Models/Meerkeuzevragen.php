@@ -11,11 +11,10 @@ class Meerkeuzevragen extends Model
     protected $table = 'meerkeuzevragen';
     protected $fillable = ['vraag', 'userID'];
 
-    public function Antwoord()
+    public function antwoord()
     {
-        return $this->hasMany(Antwoord::class, 'vraagID');
+        return $this->hasMany(Antwoord::class, 'vraagID', 'id');
     }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'userID');

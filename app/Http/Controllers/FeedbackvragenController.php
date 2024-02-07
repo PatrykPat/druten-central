@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nieuws;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -10,23 +11,24 @@ use App\models\UserHasvragen;
 use App\models\Feedbackvragen;
 use App\models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 
 class FeedbackvragenController extends Controller
 {
     //laat feedbackvragen.blade.php zien
     public function show()
-{
-    // Haal alle feedbackvragen op uit de database
-    $vragen = Feedbackvragen::all();
-    
-    // Geef de feedbackvragen door aan de view 'Feedbackvragen'
-    return view('vragen\Feedbackvragen', compact('vragen'));
-}
-public function showAlleVragen()
-{
-    // Haal alle feedbackvragen op uit de database
-    $vragen = Feedbackvragen::all();
-    // $meerkeuzevragen = Meerkeuzevragen::all();
+    {
+        // Haal alle feedbackvragen op uit de database
+        $vragen = Feedbackvragen::all();
+
+        // Geef de feedbackvragen door aan de view 'Feedbackvragen'
+        return view('vragen\Feedbackvragen', compact('vragen'));
+    }
+    public function showAlleVragen()
+    {
+        // Haal alle feedbackvragen op uit de database
+        $vragen = Feedbackvragen::all();
+        // $meerkeuzevragen = Meerkeuzevragen::all();
 
 
 
@@ -76,5 +78,20 @@ public function showAlleVragen()
         $gebruiker->save();
 
         return Redirect::to('/');
+    }
+    public function showAlles()
+    {
+        // Vandaag's datum
+        $vandaag = Carbon::today();
+
+        // Feedbackvragen van vandaag
+        $recentNieuws = Nieuws::orderBy('created_at', 'desc')->take(3)->get();
+        $feedbackvragen = Feedbackvragen::whereDate('created_at', $vandaag)->get();
+
+        // Andere gegevens ophalen
+        $nieuws = Nieuws::all();
+        $meerkeuzevragen = Meerkeuzevragen::all();
+
+        return view('dashboard', compact('feedbackvragen', 'recentNieuws', 'meerkeuzevragen'));
     }
 }

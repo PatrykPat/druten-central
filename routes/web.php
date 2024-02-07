@@ -26,27 +26,29 @@ use App\Http\Controllers\AantalvragenController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [FeedbackVragenController::class, 'showAlles'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 /* ------------- Nieuws Route ------------- */
 
 // Deze Routes zijn bereikbaar als je ingelogd bent
-Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/nieuws',[NieuwsController::class, 'Index'])
-    ->name('nieuws');});
-    Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
-    Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
-    Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/nieuws', [NieuwsController::class, 'Index'])
+        ->name('nieuws');
+});
+Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
+Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
+Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-Route::get('/nieuws/create',[NieuwsController::class, 'Create']);
-Route::post('/newnieuws', [NieuwsController::class, 'store']);
-Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
-Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
-Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');});
+    Route::get('/nieuws/create', [NieuwsController::class, 'Create']);
+    Route::post('/newnieuws', [NieuwsController::class, 'store']);
+    Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
+    Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
+    Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');
+});
 
 /* ------------- End Nieuws Route ------------- */
 
@@ -56,7 +58,7 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     Route::resource('/', UserController::class);
     Route::resource('/roles', RoleController::class);
     Route::resource('/permissions', PermissionController::class);
-    
+
 });
 
 
