@@ -12,7 +12,6 @@ class NieuwsController extends Controller
 {
     // Laat Nieuws pagina zien met Users en Nieuws tabel
     public function Index()
-
     {
         $roles = Role::all();
         $nieuws = Nieuws::with('gebruiker')->where('datum', '<', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
@@ -20,7 +19,8 @@ class NieuwsController extends Controller
         return view('nieuws.nieuwsArchief',compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
     }
 
-    public function Agenda() {
+    public function Agenda()
+    {
         $users = User::all();
     
         // Krijg nieuwsitems van vandaag of later dan vandaag
@@ -29,7 +29,7 @@ class NieuwsController extends Controller
         return view('nieuws.nieuwsAgenda', ['users' => $users, 'nieuws' => $nieuws]);
     }
 
-    // Ga naar pagina voor het creëren van nieuws
+    // Ga naar pagina voor het creÃ«ren van nieuws
     public function Create()
     {
         return view('nieuws.createNieuws');

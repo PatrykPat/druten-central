@@ -27,9 +27,9 @@ use App\Http\Controllers\CouponController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [FeedbackVragenController::class, 'showAlles'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 /* ------------- Nieuws Route ------------- */
 
@@ -56,7 +56,7 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     Route::resource('/', UserController::class);
     Route::resource('/roles', RoleController::class);
     Route::resource('/permissions', PermissionController::class);
-    
+
 });
 
 
