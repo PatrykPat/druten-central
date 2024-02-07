@@ -66,7 +66,7 @@ class NieuwsController extends Controller
             'postcode' => $request->input('postcode'),
         ]);
 
-        return redirect('/nieuws')->with('success', 'News item created successfully.');
+        return redirect('/nieuws/agenda')->with('success', 'News item created successfully.');
     }
 
     // Delete een nieuwsitem
@@ -116,7 +116,7 @@ class NieuwsController extends Controller
             'postcode' => $request->input('postcode')
         ]);
 
-        return redirect('/nieuws')->with('success', 'News item updated successfully.');
+        return redirect('/nieuws/agenda')->with('success', 'News item updated successfully.');
     }
 
     public function filter(Request $request)

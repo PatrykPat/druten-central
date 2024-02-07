@@ -34,7 +34,7 @@
         });
     </script>
 
-    <!-- foreach van alle nieuwsitems -->
+    <!-- Foreach die alle nieuwsartikelen laat zien die van eerder dan vandaag zijn -->
     @foreach ($nieuws as $nieuwsitem)
     <div class="nieuwsitembox">
         <h3>user: @if ($nieuwsitem->gebruiker)

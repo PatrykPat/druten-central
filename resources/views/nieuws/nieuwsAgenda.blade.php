@@ -6,6 +6,7 @@
 </x-slot>
 <h1>Aankomende nieuws berichten:</h1>
 
+<!-- Dropdown form om nieuwsitems te filteren -->
 <form id="filterForm" action="{{ route('nieuws.filteragenda') }}" method="GET">
     @csrf
     <label for="userFilter">Select User:</label>
@@ -31,6 +32,7 @@
         });
 </script>
 
+<!-- Foreach die alle nieuwsartikelen laat zien die van vandaag of later zijn -->
 @foreach ($nieuws as $nieuwsitem)
 <div class="nieuwsitembox">
     <h3>user: @if ($nieuwsitem->gebruiker)
