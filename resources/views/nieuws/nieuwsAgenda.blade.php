@@ -6,6 +6,7 @@
 </x-slot>
 <h1>Aankomende nieuws berichten:</h1>
 
+<!-- Dropdown form om nieuwsitems te filteren -->
 <form id="filterForm" action="{{ route('nieuws.filteragenda') }}" method="GET">
     @csrf
     <label for="userFilter">Select User:</label>
@@ -24,9 +25,21 @@
     </select>
 </form>
 
+<script>
+        // Filter met javascript automatisch
+        document.getElementById('userFilter').addEventListener('change', function () {
+            document.getElementById('filterForm').submit();
+        });
+</script>
+
+<!-- Foreach die alle nieuwsartikelen laat zien die van vandaag of later zijn -->
 @foreach ($nieuws as $nieuwsitem)
 <div class="nieuwsitembox">
-    <h3>user: {{$nieuwsitem->user_iduser}}</h3>
+    <h3>user: @if ($nieuwsitem->gebruiker)
+            {{ $nieuwsitem->gebruiker->name }}
+            @else
+            Geen gebruiker gevonden
+            @endif</h3>
     <h3>title: {{$nieuwsitem->title}}</h3>
     <h4>description: {{$nieuwsitem->beschrijving}}</h4>
     <h4>date: {{$nieuwsitem->datum}}</h4>
@@ -45,7 +58,7 @@
     </form>
     @endrole
     @endauth
-</div>
+</div><br>
 @endforeach
 
 <!-- Link naar create form -->
