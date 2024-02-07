@@ -12,27 +12,81 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @role('user')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
+                    @endrole
+
+                    @role('user')
+                    <x-nav-link :href="route('nieuws')" :active="request()->routeIs('nieuws')">
                         {{ __('Archief') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('nieuws.agenda')" :active="request()->routeIs('nieuws.agenda')">
-                        {{ __('Agenda') }}
-                    </x-nav-link>
+                    @endrole
                     @role('admin')
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
-                        {{ __('Admin') }}
+                        {{ __('users') }}
                     </x-nav-link>
                     @endrole
-                    <x-nav-link :href="route('meer-vragen')" :active="request()->routeIs('meer-vragen')">
-                        {{ __('Meer vragen') }}
+                    @role('bedrijf')
+                    <x-nav-link :href="route('nieuws.create')" :active="request()->routeIs('dashboard')">
+                        {{ __('Create nieuws') }}
                     </x-nav-link>
+                    @endrole
+                    @role('bedrijf')
+                    <x-nav-link :href="route('meerkeuzevragen.show')" :active="request()->routeIs('dashboard')">
+                        {{ __('Create meerkeuze vraag') }}
+                    </x-nav-link>
+                    @endrole
+                    @role('bedrijf')
+                    <x-nav-link :href="route('feedbackantwoorden.showAnt')" :active="request()->routeIs('dashboard')">
+                        {{ __('Antwoord op feedback') }}
+                    </x-nav-link>
+                    @endrole
 
-                    <!-- weghalen van andere menu items -->
-                </div>
+                    @role('admin')
+                    <x-nav-link :href="route('admin.create')" :active="request()->routeIs('dashboard')">
+                        {{ __('Create bedrijf') }}
+                    </x-nav-link>
+                    @endrole
+                    @role('admin')
+                    <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('dashboard')">
+                        {{ __('roles') }}
+                    </x-nav-link>
+                    @endrole
+                    
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        @role('user')
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div>{{ __('Meer vragen') }}</div><br>
+
+                            <div class="ml-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('feedbackvragen.show')">
+                            {{ __('feedbackvragen') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('meerkeuzevragen.show')">
+                            {{ __('meerkeuzevragen') }}
+                        </x-dropdown-link>
+                    </x-slot>
+                </x-dropdown>
+                @endrole
             </div>
+        </div>
+    </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -41,7 +95,7 @@
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div><br>
-                            <div>{{ Auth::user()->id }}</div>
+                            <div>{{ Auth::user()->role }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -58,12 +112,19 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-                        <x-dropdown-link>
-                        Aantal punten:{{Auth::user()->punten}}
-                        </x-dropdown>
-                        <x-dropdown-link :href="route('coupons.show')">
+                        @auth
+                            @role('user')
+                                <x-dropdown-link>
+                                    Aantal punten:{{Auth::user()->punten}}
+                                </x-dropdown>
+                            @endrole
+                        @endauth
+                        
+                        @role('user')
+                        <x-dropdown-link :href="route('nieuws')">
                             {{ __('Coupons') }}
                         </x-dropdown-link>
+                        @endrole
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

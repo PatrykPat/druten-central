@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-Route::get('/nieuws/create',[NieuwsController::class, 'Create']);
+Route::get('/nieuws/create',[NieuwsController::class, 'Create'])->name('nieuws.create');
 Route::post('/newnieuws', [NieuwsController::class, 'store']);
 Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
 Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');

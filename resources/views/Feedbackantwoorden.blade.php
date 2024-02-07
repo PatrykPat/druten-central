@@ -7,7 +7,6 @@
                     <ul role="list" class="divide-y divide-gray-100">
                         @foreach ($vragen as $vraag)
                         @if ($vraag->user_userid == auth()->id())
-                        <!-- Loop through answers related to this question -->
                         @foreach ($antwoorden as $antwoord)
                         @if ($antwoord->Vragen_idVragen == $vraag->id)
                         <!-- Een lijstitem voor de weergave van vraag en bijbehorend antwoord -->
