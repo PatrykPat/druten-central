@@ -27,7 +27,7 @@ use App\Http\Controllers\CouponController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [NieuwsController::class, 'today'],function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

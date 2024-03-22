@@ -171,12 +171,17 @@ class NieuwsController extends Controller
 
     public function entriesLastThreeDays() 
     {
-        $now = now();
-
-        $threeDaysAgo = $now->subDays(3);
-
-        $nieuws = Nieuws::where('datum', '>=', $threeDaysAgo)->get();
+        $nieuws = Nieuws::orderBy('datum', 'desc')->take(3)->get();
 
         return view('nieuws.nieuwsRecent', ['nieuws' => $nieuws]);
+    }
+
+    public function today()
+    {
+        $currentDate = now()->toDateString();
+
+        $nieuws = Nieuws::whereDate('datum', $currentDate)->get();
+
+        return view('dashboard', ['nieuws' => $nieuws]);
     }
 }

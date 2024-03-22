@@ -4,7 +4,7 @@
         {{ __('Recente nieuws') }}
     </h2>
 </x-slot>
-<h1>Recente nieuws artikelen:</h1>
+<h1>3 meest recente nieuws artikelen:</h1>
 
 @foreach ($nieuws as $nieuwsitem)
 <div class="nieuwsitembox">
