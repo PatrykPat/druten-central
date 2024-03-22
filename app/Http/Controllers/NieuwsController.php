@@ -168,4 +168,15 @@ class NieuwsController extends Controller
             'selectedUserPostcode' => $userPostcode ?? null,
         ]);
     }
+
+    public function entriesLastThreeDays() 
+    {
+        $now = now();
+
+        $threeDaysAgo = $now->subDays(3);
+
+        $nieuws = Nieuws::where('datum', '>=', $threeDaysAgo)->get();
+
+        return view('nieuws.nieuwsRecent', ['nieuws' => $nieuws]);
+    }
 }

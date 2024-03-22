@@ -35,10 +35,11 @@ Route::get('/', function () {
 
 // Deze Routes zijn bereikbaar als je ingelogd bent
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/nieuws/archief',[NieuwsController::class, 'Index'])->name('nieuws.archief');});
+    Route::get('/nieuws/archief',[NieuwsController::class, 'Index'])->name('nieuws.archief');
     Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
     Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
     Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
+    Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');});
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
