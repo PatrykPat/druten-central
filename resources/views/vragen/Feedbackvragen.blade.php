@@ -4,7 +4,7 @@
     <div class="py-12 w-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+                <div class="text-gray-900">
                     <div class="flex justify-end">
                     </div>
                     <ul role="list" class="divide-y divide-gray-100">
@@ -16,6 +16,8 @@
 
                     <!-- Verborgen veld om de vraag-ID door te geven -->
                     <input type="hidden" name="vraag_id" value="{{ $vraag->id }}">
+
+                    <label for="antwoord">{{ $vraag->title }}</label><br>
 
                     <!-- Label voor het weergeven van de vraag -->
                     <label for="antwoord">{{ $vraag->beschrijving }}</label><br>

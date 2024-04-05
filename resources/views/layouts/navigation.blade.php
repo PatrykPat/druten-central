@@ -36,6 +36,7 @@
                     <x-nav-link :href="route('nieuws.create')" :active="request()->routeIs('dashboard')">
                         {{ __('Create nieuws') }}
                     </x-nav-link>
+                    
                     @endrole
                     @role('bedrijf')
                     <x-nav-link :href="route('meerkeuzevragen.show')" :active="request()->routeIs('dashboard')">
@@ -58,7 +59,16 @@
                         {{ __('roles') }}
                     </x-nav-link>
                     @endrole
-                    
+                    @role('user')
+                    <x-nav-link :href="route('coupons.showShop')" :active="request()->routeIs('coupons.showShop')">
+                        {{ __('Coupon shop') }}
+                    </x-nav-link>
+                     @endrole
+                     @role('bedrijf')
+                    <x-nav-link :href="route('coupons.form')" :active="request()->routeIs('coupons.form')">
+                        {{ __(' create form') }}
+                    </x-nav-link>
+                    @endrole
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @role('user')
                 <x-dropdown align="right" width="48">
@@ -125,7 +135,6 @@
                         @endauth
                         
                         @role('user')
-                        <x-dropdown-link :href="route('nieuws')">
                         <x-dropdown-link :href="route('coupons.show')">
                             {{ __('Coupons') }}
                         </x-dropdown-link>
