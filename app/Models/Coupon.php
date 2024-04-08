@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     protected $table = 'coupons';
 
@@ -17,4 +17,5 @@ class Coupon extends Model
     {
         return $this->hasMany(CouponHasUser::class, 'id', 'id');
     }
+
 }

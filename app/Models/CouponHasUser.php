@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CouponHasUser extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'coupons';
+    protected $table = 'coupons_has_user';
 
     protected $fillable = ['user_iduser', 'coupons_idcoupons'];
 
@@ -17,4 +16,10 @@ class CouponHasUser extends Model
     {
         return $this->belongsTo(User::class, 'User_idUser', 'id');
     }
+    // In CouponHasUser model
+    public function coupon()
+    {
+        return $this->belongsTo('App\Models\Coupon', 'coupons_idcoupons', 'id');
+    }
+
 }
