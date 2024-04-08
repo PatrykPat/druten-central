@@ -12,6 +12,7 @@ use App\models\Feedbackvragen;
 use App\models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackvragenController extends Controller
 {
@@ -93,5 +94,33 @@ class FeedbackvragenController extends Controller
         $meerkeuzevragen = Meerkeuzevragen::all();
 
         return view('dashboard', compact('feedbackvragen', 'recentNieuws', 'meerkeuzevragen'));
+    }
+    public function form()
+    {
+        return view('vragen\Feedbackvragenform');
+    }
+    public function send(Request $request)
+    {
+        // Valideer de ingediende gegevens
+        $validatedData = $request->validate([
+            'puntenTeVerdienen' => 'required|numeric',
+            'title' => 'required|string',
+            'beschrijving' => 'required|string',
+        ]);
+
+        // Maak een nieuwe instantie van het Coupon model
+        $feedbackvragen = new feedbackvragen();
+        $user = Auth::user();
+        // Vul de eigenschappen van het model met de ingediende gegevens
+        $feedbackvragen->beschrijving = $validatedData['beschrijving'];
+        $feedbackvragen->title = $validatedData['title'];
+        $feedbackvragen->puntenTeVerdienen = $validatedData['puntenTeVerdienen'];
+        $feedbackvragen->user_userid = $user->id;
+
+        // Sla de coupon op in de database
+        $feedbackvragen->save();
+
+        // Geef een succesbericht terug of leid de gebruiker door naar een andere pagina
+        return redirect()->route('feedback.form')->with('success', 'vraag is succesvol opgeslagen.');
     }
 }

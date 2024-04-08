@@ -51,6 +51,8 @@ Route::middleware(['auth', 'role:bedrijf'])->group(function () {
     Route::get('/meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
     Route::get('/createcoupons', [CouponController::class, 'form'])->name('coupons.form');
     Route::post('/createcoupons', [CouponController::class, 'send'])->name('coupons.send');
+    Route::get('/createfeedback', [FeedbackvragenController::class, 'form'])->name('feedback.form');
+    Route::post('/createfeedback', [FeedbackvragenController::class, 'send'])->name('feedback.send');
 });
 
 /* ------------- End Nieuws Route ------------- */
@@ -71,7 +73,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt'])->name('feedbackantwoorden.showAnt');
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
-    Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
     Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
@@ -83,6 +84,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/shop', [CouponController::class, 'showShop'])->name('coupons.showShop');
     Route::get('/coupons', [CouponController::class, 'show'])->name('coupons.show');
     Route::post('/coupons', [CouponController::class, 'buy'])->name('coupons.buy');
+    Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
 });
 
 /* ------------- End Routes alleen voor User ------------- */
