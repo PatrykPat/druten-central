@@ -55,13 +55,13 @@
             </h2>
         </x-slot>
 
-        <div class="py-12">
+                <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <p>welkom terug {{Auth::user()->name}}</p>
                         de feedbackvragen van vandaag: <br>
-                        @foreach($feedbackvragen as $vraag)
+                         @foreach($feedbackvragen as $vraag)
                         <!-- Een formulier voor het verwerken van het antwoord -->
                         <form method="POST" action="{{ route('verwerkantwoord') }}">
                             @csrf
@@ -91,6 +91,8 @@
                         </form>
                         @endforeach
 
+                        <!-- Controleren of er nieuwsitems zijn -->
+                        @if(count($recentNieuws) > 0)
                         <div class="nieuwscontainer">
                             @foreach ($recentNieuws as $nieuwsitem)
                             <div class="nieuwsitembox">
@@ -106,6 +108,9 @@
                             </div><br>
                             @endforeach
                         </div>
+                        @else
+                        <p>er zijn geen nieuws en of vragen voor nu</p>
+                        @endif
                     </div>
                 </div>
             </div>

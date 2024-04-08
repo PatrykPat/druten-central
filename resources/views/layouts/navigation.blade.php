@@ -69,6 +69,11 @@
                         {{ __(' create coupons') }}
                     </x-nav-link>
                     @endrole
+                     @role('bedrijf')
+                    <x-nav-link :href="route('feedback.form')" :active="request()->routeIs('feedback.form')">
+                        {{ __(' create feedback') }}
+                    </x-nav-link>
+                    @endrole
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @role('user')
                 <x-dropdown align="right" width="48">
