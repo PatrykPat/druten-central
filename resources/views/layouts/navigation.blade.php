@@ -66,7 +66,7 @@
                      @endrole
                      @role('bedrijf')
                     <x-nav-link :href="route('coupons.form')" :active="request()->routeIs('coupons.form')">
-                        {{ __(' create form') }}
+                        {{ __(' create coupons') }}
                     </x-nav-link>
                     @endrole
                     <div class="hidden sm:flex sm:items-center sm:ml-6">

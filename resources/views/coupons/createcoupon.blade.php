@@ -29,7 +29,6 @@
         <label for="einddatum">Einddatum:</label>
         <input type="date" id="einddatum" name="einddatum" class="form-control">
     </div>
-    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

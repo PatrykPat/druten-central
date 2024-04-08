@@ -11,7 +11,7 @@
 </div>
  @foreach ($coupons as $Coupon)
  <div class="coupon">
-    <br>coupon:{{ $Coupon->id}}<br>
+    <br>te besteden in :{{ $Coupon->user_iduser}}<br>
     {{ $Coupon->Omschrijving }}<br>
     waarde:{{ $Coupon->Waarde }}{{ $Coupon->Eenheid }} <br>
     prijs:{{ $Coupon->Puntenprijs }} punt(en)<br>
