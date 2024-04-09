@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('vraagID');
             $table->string('AntwoordTekst');
             $table->boolean('IsCorrect');
-            $table->foreign('vraagID')->references('idmeerkeuzevraag')->on('meerkeuzevragen')->onDelete('cascade');
+            $table->foreign('vraagID')->references('id')->on('meerkeuzevragen')->onDelete('cascade');
             $table->timestamps();
         });
     }
