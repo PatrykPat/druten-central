@@ -24,7 +24,6 @@
 
             <label for="opties">Opties:</label>
             <div id="opties-container">
-
                 <div class="optie">
                     <input type="text" name="opties[0][tekst]" required>
                     <input type="checkbox" name="opties[0][is_correct]" value="1">
@@ -42,6 +41,8 @@
                     <input type="checkbox" name="opties[3][is_correct]" value="1">
                 </div>
             </div>
+            <label for="punten">hoeveel punten moet de gebruiker krijgen:</label>
+            <input type="number" id="punten" name="punten" required><br>
             <input type="submit" value="Verstuur">
         </form>
 </body>

@@ -12,6 +12,7 @@ use App\models\Feedbackvragen;
 use App\models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Auth;
 
 class FeedbackvragenController extends Controller
@@ -87,10 +88,9 @@ class FeedbackvragenController extends Controller
 
         // Feedbackvragen van vandaag
         $recentNieuws = Nieuws::orderBy('created_at', 'desc')->take(3)->get();
-        $feedbackvragen = Feedbackvragen::whereDate('created_at', $vandaag)->get();
+        $feedbackvragen = Feedbackvragen::orderBy('created_at', 'desc')->take(3)->get();
 
         // Andere gegevens ophalen
-        $nieuws = Nieuws::all();
         $meerkeuzevragen = Meerkeuzevragen::all();
 
         return view('dashboard', compact('feedbackvragen', 'recentNieuws', 'meerkeuzevragen'));

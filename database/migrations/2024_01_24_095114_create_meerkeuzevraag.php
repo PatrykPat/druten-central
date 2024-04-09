@@ -13,8 +13,9 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('meerkeuzevragen', function (Blueprint $table) {
-            $table->id('idmeerkeuzevraag');
+            $table->id('id');
             $table->string('vraag');
+            $table->integer('puntenTeVerdienen');
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

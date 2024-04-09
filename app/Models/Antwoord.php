@@ -14,4 +14,12 @@ class Antwoord extends Model
     {
         return $this->belongsTo(Meerkeuzevragen::class, 'vraagID');
     }
+    public function antwoorden()
+    {
+        return $this->hasMany('App\Antwoord', 'vraagID', 'idmeerkeuzevraag');
+    }
+    public function vraag()
+    {
+        return $this->belongsTo('App\Meerkeuzevraag', 'vraagID', 'idmeerkeuzevraag');
+    }
 }

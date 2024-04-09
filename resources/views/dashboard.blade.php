@@ -38,7 +38,6 @@
 
         form {
             max-width: 400px;
-            margin: 0 auto;
         }
 
         label {

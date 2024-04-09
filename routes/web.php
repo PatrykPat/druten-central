@@ -85,6 +85,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/coupons', [CouponController::class, 'show'])->name('coupons.show');
     Route::post('/coupons', [CouponController::class, 'buy'])->name('coupons.buy');
     Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
+    Route::get('/meerkeuzevraag', [Meerkeuzevragencontroller::class, 'showvraag'])->name('meerkeuzevragen.showvraag');
+    Route::post('/meerkeuzevraag', [Meerkeuzevragencontroller::class, 'control'])->name('meerkeuzevragen.control');
 });
 
 /* ------------- End Routes alleen voor User ------------- */
