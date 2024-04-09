@@ -7,7 +7,7 @@
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-<h1>Coupons</h1>
+<h1>jouw coupons</h1>
 @foreach($coupons as $coupon)
     <div class="coupon">
         <h2>{{ $coupon->coupon->id }}</h2>

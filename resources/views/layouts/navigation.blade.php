@@ -97,7 +97,7 @@
                         <x-dropdown-link :href="route('feedbackvragen.show')">
                             {{ __('feedbackvragen') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('meerkeuzevragen.show')">
+                        <x-dropdown-link :href="route('meerkeuzevragen.showvraag')">
                             {{ __('meerkeuzevragen') }}
                         </x-dropdown-link>
                     </x-slot>
