@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nieuws;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -10,23 +11,26 @@ use App\models\UserHasvragen;
 use App\models\Feedbackvragen;
 use App\models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
+
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackvragenController extends Controller
 {
     //laat feedbackvragen.blade.php zien
     public function show()
-{
-    // Haal alle feedbackvragen op uit de database
-    $vragen = Feedbackvragen::all();
-    
-    // Geef de feedbackvragen door aan de view 'Feedbackvragen'
-    return view('vragen\Feedbackvragen', compact('vragen'));
-}
-public function showAlleVragen()
-{
-    // Haal alle feedbackvragen op uit de database
-    $vragen = Feedbackvragen::all();
-    // $meerkeuzevragen = Meerkeuzevragen::all();
+    {
+        // Haal alle feedbackvragen op uit de database
+        $vragen = Feedbackvragen::all();
+
+        // Geef de feedbackvragen door aan de view 'Feedbackvragen'
+        return view('vragen\Feedbackvragen', compact('vragen'));
+    }
+    public function showAlleVragen()
+    {
+        // Haal alle feedbackvragen op uit de database
+        $vragen = Feedbackvragen::all();
+        // $meerkeuzevragen = Meerkeuzevragen::all();
 
 
 
@@ -76,5 +80,47 @@ public function showAlleVragen()
         $gebruiker->save();
 
         return Redirect::to('/');
+    }
+    public function showAlles()
+    {
+        // Vandaag's datum
+        $vandaag = Carbon::today();
+
+        // Feedbackvragen van vandaag
+        $recentNieuws = Nieuws::orderBy('created_at', 'desc')->take(3)->get();
+        $feedbackvragen = Feedbackvragen::orderBy('created_at', 'desc')->take(3)->get();
+
+        // Andere gegevens ophalen
+        $meerkeuzevragen = Meerkeuzevragen::all();
+
+        return view('dashboard', compact('feedbackvragen', 'recentNieuws', 'meerkeuzevragen'));
+    }
+    public function form()
+    {
+        return view('vragen\Feedbackvragenform');
+    }
+    public function send(Request $request)
+    {
+        // Valideer de ingediende gegevens
+        $validatedData = $request->validate([
+            'puntenTeVerdienen' => 'required|numeric',
+            'title' => 'required|string',
+            'beschrijving' => 'required|string',
+        ]);
+
+        // Maak een nieuwe instantie van het Coupon model
+        $feedbackvragen = new feedbackvragen();
+        $user = Auth::user();
+        // Vul de eigenschappen van het model met de ingediende gegevens
+        $feedbackvragen->beschrijving = $validatedData['beschrijving'];
+        $feedbackvragen->title = $validatedData['title'];
+        $feedbackvragen->puntenTeVerdienen = $validatedData['puntenTeVerdienen'];
+        $feedbackvragen->user_userid = $user->id;
+
+        // Sla de coupon op in de database
+        $feedbackvragen->save();
+
+        // Geef een succesbericht terug of leid de gebruiker door naar een andere pagina
+        return redirect()->route('feedback.form')->with('success', 'vraag is succesvol opgeslagen.');
     }
 }

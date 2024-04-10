@@ -28,9 +28,12 @@ use App\Http\Controllers\CouponController;
 |
 */
 
-Route::get('/', [NieuwsController::class, 'today'],function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/', [NieuwsController::class, 'today'],function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [FeedbackVragenController::class, 'showAlles'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 /* ------------- Nieuws Route ------------- */
 
@@ -44,14 +47,26 @@ Route::middleware(['auth', 'verified'])->group(function(){
     // Route::get('/nieuws/agenda', [AgendaController::class, 'show'])->name('nieuws.agenda');
     Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
     Route::post('/nieuws/agenda-AJAX', [AgendaController::class, 'ajax']);});
+// Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
+//     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
+// });
+// Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
+// Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
+// Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-Route::get('/nieuws/create',[NieuwsController::class, 'Create'])->name('nieuws.create');
-Route::post('/newnieuws', [NieuwsController::class, 'store']);
-Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
-Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
-Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');});
+    Route::get('/nieuws/create', [NieuwsController::class, 'Create'])->name('nieuws.create');
+    Route::post('/newnieuws', [NieuwsController::class, 'store']);
+    Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
+    Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
+    Route::put('/nieuws/{nieuws}', [NieuwsController::class, 'update'])->name('nieuws.update');
+    Route::get('/meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
+    Route::get('/createcoupons', [CouponController::class, 'form'])->name('coupons.form');
+    Route::post('/createcoupons', [CouponController::class, 'send'])->name('coupons.send');
+    Route::get('/createfeedback', [FeedbackvragenController::class, 'form'])->name('feedback.form');
+    Route::post('/createfeedback', [FeedbackvragenController::class, 'send'])->name('feedback.send');
+});
 
 /* ------------- End Nieuws Route ------------- */
 
@@ -61,7 +76,7 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     Route::resource('/', UserController::class);
     Route::resource('/roles', RoleController::class);
     Route::resource('/permissions', PermissionController::class);
-    
+
 });
 
 
@@ -71,7 +86,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt'])->name('feedbackantwoorden.showAnt');
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
-    Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
     Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
@@ -80,8 +94,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/feedbackvragen', [FeedbackvragenController::class, 'show'])->name('feedbackvragen.show');
-    Route::get('/meerkeuzevragen', [Meerkeuzevragencontroller::class, 'show'])->name('meerkeuzevragen.show');
+    Route::get('/shop', [CouponController::class, 'showShop'])->name('coupons.showShop');
     Route::get('/coupons', [CouponController::class, 'show'])->name('coupons.show');
+    Route::post('/coupons', [CouponController::class, 'buy'])->name('coupons.buy');
+    Route::get('/meer-vragen', [FeedbackvragenController::class, 'showAlleVragen'])->name('meer-vragen');
+    Route::get('/meerkeuzevraag', [Meerkeuzevragencontroller::class, 'showvraag'])->name('meerkeuzevragen.showvraag');
+    Route::post('/meerkeuzevraag', [Meerkeuzevragencontroller::class, 'control'])->name('meerkeuzevragen.control');
 });
 
 /* ------------- End Routes alleen voor User ------------- */

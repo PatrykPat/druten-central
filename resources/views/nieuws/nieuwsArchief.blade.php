@@ -1,27 +1,28 @@
 <x-app-layout>
-<x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Nieuws') }}
-    </h2>
-</x-slot>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Nieuws') }}
+        </h2>
+    </x-slot>
 
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <h1> Nieuws: </h1>
 
-<!-- Dropdown form om nieuwsitems te filteren -->
-<form id="filterForm" action="{{ route('nieuws.filter') }}" method="GET">
-    @csrf
-    <label for="userFilter">Select User:</label>
-    <select id="userFilter" name="user_postcode">
-        <option value="" {{ empty($selectedUserPostcode) ? 'selected' : '' }}>All Users</option>
-        <!-- foreach die alle users laat zien met de role bedrijf -->
-        @foreach ($users as $user)
+    <!-- Dropdown form om nieuwsitems te filteren -->
+    <form id="filterForm" action="{{ route('nieuws.filter') }}" method="GET">
+        @csrf
+        <label for="userFilter">Select User:</label>
+        <select id="userFilter" name="user_postcode">
+            <option value="" {{ empty($selectedUserPostcode) ? 'selected' : '' }}>All Users</option>
+            <!-- foreach die alle users laat zien met de role bedrijf -->
+            @foreach ($users as $user)
             @foreach ($user->roles as $role)
-                @if ($role->name == 'bedrijf')
-                    <option value="{{ $user->postcode }}" {{ isset($selectedUserPostcode) && $selectedUserPostcode == $user->postcode ? 'selected' : '' }}>
-                        {{ $user->name }}
-                    </option>
-                @endif
+            @if ($role->name == 'bedrijf')
+            <option value="{{ $user->postcode }}" {{ isset($selectedUserPostcode) && $selectedUserPostcode==$user->
+                postcode ? 'selected' : '' }}>
+                {{ $user->name }}
+            </option>
+            @endif
             @endforeach
             @endforeach
         </select>
