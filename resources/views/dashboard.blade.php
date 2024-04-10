@@ -114,5 +114,22 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+
+    <div class="todayNieuws">
+    <h2> Het nieuws van vandaag:</h2>
+    @foreach ($nieuws as $nieuwsitem)
+    <div class="nieuwsitembox">
+        <h3>user: @if ($nieuwsitem->gebruiker)
+            {{ $nieuwsitem->gebruiker->name }}
+            @else
+            Geen gebruiker gevonden
+            @endif</h3>
+        <h3>title: {{$nieuwsitem->title}}</h3>
+        <h4>description: {{$nieuwsitem->beschrijving}}</h4>
+        <h4>date: {{$nieuwsitem->datum}}</h4>
+        <h4>postcode: {{$nieuwsitem->postcode}}</h4>
+    </div><br>
+    @endforeach
+    </div>
 </x-app-layout>

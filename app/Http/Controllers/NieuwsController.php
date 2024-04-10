@@ -19,14 +19,13 @@ class NieuwsController extends Controller
         return view('nieuws.nieuwsArchief',compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
     }
 
-    public function Agenda()
-    {
+    public function Kalender() {
         $users = User::all();
     
         // Krijg nieuwsitems van vandaag of later dan vandaag
         $nieuws = Nieuws::with('gebruiker')->where('datum', '>=', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
     
-        return view('nieuws.nieuwsAgenda', ['users' => $users, 'nieuws' => $nieuws]);
+        return view('nieuws.nieuwsKalender', ['users' => $users, 'nieuws' => $nieuws]);
     }
 
     // Ga naar pagina voor het creÃ«ren van nieuws
@@ -66,7 +65,7 @@ class NieuwsController extends Controller
             'postcode' => $request->input('postcode'),
         ]);
 
-        return redirect('/nieuws/agenda')->with('success', 'News item created successfully.');
+        return redirect('/nieuws/kalender')->with('success', 'News item created successfully.');
     }
 
     // Delete een nieuwsitem
@@ -116,7 +115,7 @@ class NieuwsController extends Controller
             'postcode' => $request->input('postcode')
         ]);
 
-        return redirect('/nieuws/agenda')->with('success', 'News item updated successfully.');
+        return redirect('/nieuws/kalender')->with('success', 'News item updated successfully.');
     }
 
     public function filter(Request $request)
@@ -144,7 +143,7 @@ class NieuwsController extends Controller
         ]);
     }
 
-    public function filterAgenda(Request $request)
+    public function filterKalender(Request $request)
     {
         $userPostcode = $request->input('user_postcode');
 
@@ -162,10 +161,26 @@ class NieuwsController extends Controller
 
         $filteredNieuws = $nieuws->get();
 
-        return view('nieuws.nieuwsAgenda', [
+        return view('nieuws.nieuwsKalender', [
             'users' => $users,
             'nieuws' => $filteredNieuws,
             'selectedUserPostcode' => $userPostcode ?? null,
         ]);
+    }
+
+    public function entriesLastThreeDays() 
+    {
+        $nieuws = Nieuws::orderBy('datum', 'desc')->take(3)->get();
+
+        return view('nieuws.nieuwsRecent', ['nieuws' => $nieuws]);
+    }
+
+    public function today()
+    {
+        $currentDate = now()->toDateString();
+
+        $nieuws = Nieuws::whereDate('datum', $currentDate)->get();
+
+        return view('dashboard', ['nieuws' => $nieuws]);
     }
 }

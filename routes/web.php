@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FeedbackvragenController;
+use App\Http\Controllers\AgendaController;
 use App\Models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -27,6 +28,9 @@ use App\Http\Controllers\CouponController;
 |
 */
 
+// Route::get('/', [NieuwsController::class, 'today'],function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/', [FeedbackVragenController::class, 'showAlles'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -34,12 +38,21 @@ Route::get('/', [FeedbackVragenController::class, 'showAlles'])
 /* ------------- Nieuws Route ------------- */
 
 // Deze Routes zijn bereikbaar als je ingelogd bent
-Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
-    Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
-});
-Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
-Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
-Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/nieuws/archief',[NieuwsController::class, 'Index'])->name('nieuws.archief');
+    Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
+    Route::get('/nieuws/filterkalender', [NieuwsController::class, 'filterKalender'])->name('nieuws.filterkalender');
+    Route::get('/nieuws/kalender', [NieuwsController::class, 'Kalender'])->name('nieuws.agenda');
+    Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
+    // Route::get('/nieuws/agenda', [AgendaController::class, 'show'])->name('nieuws.agenda');
+    Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
+    Route::post('/nieuws/agenda-AJAX', [AgendaController::class, 'ajax']);});
+// Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
+//     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
+// });
+// Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
+// Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
+// Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {

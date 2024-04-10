@@ -16,15 +16,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
-
                     @endrole
 
-                    @role('user, bedrijf')
-                    <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
+                    @role('user')
+                    <x-nav-link :href="route('nieuws')" :active="request()->routeIs('nieuws')">
                         {{ __('Archief') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('nieuws.agenda')" :active="request()->routeIs('nieuws.agenda')">
-                        {{ __('Agenda') }}
                     </x-nav-link>
                     @endrole
                     @role('admin')
