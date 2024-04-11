@@ -28,9 +28,6 @@ use App\Http\Controllers\CouponController;
 |
 */
 
-// Route::get('/', [NieuwsController::class, 'today'],function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/', [FeedbackVragenController::class, 'showAlles'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -42,7 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/nieuws/archief',[NieuwsController::class, 'Index'])->name('nieuws.archief');
     Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
     Route::get('/nieuws/filterkalender', [NieuwsController::class, 'filterKalender'])->name('nieuws.filterkalender');
-    Route::get('/nieuws/kalender', [NieuwsController::class, 'Kalender'])->name('nieuws.agenda');
+    Route::get('/nieuws/kalender', [NieuwsController::class, 'Kalender'])->name('nieuws.kalender');
     Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
     // Route::get('/nieuws/agenda', [AgendaController::class, 'show'])->name('nieuws.agenda');
     Route::get('/nieuws/agenda', [AgendaController::class, 'index']);

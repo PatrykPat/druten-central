@@ -13,7 +13,6 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>Laravel 10 Create Eevent in Full calendar using AJAX - Techsolutionstuff</h1>
 			<div id='calendar'></div>
 		</div>
 		<script>

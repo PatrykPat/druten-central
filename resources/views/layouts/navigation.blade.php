@@ -19,10 +19,17 @@
                     @endrole
 
                     @role('user')
-                    <x-nav-link :href="route('nieuws')" :active="request()->routeIs('nieuws')">
-                        {{ __('Archief') }}
+                    <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
+                        {{ __('Nieuws Archief') }}
                     </x-nav-link>
                     @endrole
+
+                    @role('user')
+                    <x-nav-link :href="route('nieuws.kalender')" :active="request()->routeIs('nieuws.kalender')">
+                        {{ __('Nieuws Kalender') }}
+                    </x-nav-link>
+                    @endrole
+
                     @role('admin')
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
                         {{ __('users') }}
