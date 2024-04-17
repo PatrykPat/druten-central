@@ -21,17 +21,5 @@ class UserHasVragenSeeder extends Seeder
             'antwoord' => 'heel slecht en saai',
             'rating' => 2,
         ]);
-        UserHasVragen::create([
-            'User_idUser' => 3,
-            'vragen_idVragen' => 2,
-            'antwoord' => 'helemaal nisk het is echt een top winkel',
-            'rating' => 10,
-        ]);
-        UserHasVragen::create([
-            'User_idUser' => 3,
-            'vragen_idVragen' => "3",
-            'antwoord' => 'omdat het nou eenmaal zo mooi bij elkaar gaat',
-            'rating' => 8,
-        ]);
     }
 }

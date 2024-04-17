@@ -60,7 +60,25 @@
                     <div class="p-6 text-gray-900">
                         <p>welkom terug {{Auth::user()->name}}</p>
                         de feedbackvragen van vandaag: <br>
-                         @foreach($feedbackvragen as $vraag)
+                        @foreach ($meerkeuzevragen as $vraag)
+                            <form method="POST" action="{{ route('meerkeuzevragen.control') }}">
+                            @csrf
+                                <h2>{{ $vraag->vraag }}</h2>
+                                <ul>
+                                    @foreach ($vraag->antwoorden as $antwoord)
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" name="antwoord[{{ $antwoord->antwoordID }}]" value="{{ $antwoord->antwoordID }}"> 
+                                                {{ $antwoord->AntwoordTekst }}
+                                            </label>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <input type="hidden" name="vraag_id" value="{{ $vraag->id }}">
+                                <button type="submit">Controleer antwoord</button>
+                                </form>
+                        @endforeach
+                        @foreach($feedbackvragen as $vraag)
                         <!-- Een formulier voor het verwerken van het antwoord -->
                         <form method="POST" action="{{ route('verwerkantwoord') }}">
                             @csrf

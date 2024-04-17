@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\userhasmeerkeuzevraag;
+use Illuminate\Support\Facades\DB;
 
 class Meerkeuzevragencontroller extends Controller
 {
@@ -45,7 +47,14 @@ class Meerkeuzevragencontroller extends Controller
 
     public function showvraag()
     {
-        $vragenMetAntwoorden = Meerkeuzevragen::with('antwoorden')->get();
+        $vragenMetAntwoorden = Meerkeuzevragen::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('userhasmeerkeuzevraag')
+                ->whereRaw('userhasmeerkeuzevraag.Vragen_idVragen = meerkeuzevragen.id')
+                ->where('userhasmeerkeuzevraag.User_idUser', auth()->user()->id);
+        })->get();
+
+
         return view('vragen\meerkeuzervraag', compact('vragenMetAntwoorden'));
     }
     public function control(Request $request)
@@ -58,6 +67,11 @@ class Meerkeuzevragencontroller extends Controller
         $juisteAntwoorden = Antwoord::where('vraagID', $vraagID)->where('IsCorrect', true)->pluck('antwoordID')->toArray();
         // Controleer goede antwoord
         $correct = array_diff($juisteAntwoorden, $geselecteerdeAntwoorden) === array_diff($geselecteerdeAntwoorden, $juisteAntwoorden);
+
+        userhasmeerkeuzevraag::create([
+            'User_idUser' => $user->id,
+            'Vragen_idVragen' => $vraagID,
+        ]);
 
         if ($correct) {
             $vraag = Meerkeuzevragen::find($vraagID);

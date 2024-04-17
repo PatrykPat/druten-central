@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Antwoord;
 use App\Models\Nieuws;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -12,27 +13,31 @@ use App\models\Feedbackvragen;
 use App\models\Meerkeuzevragen;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
 class FeedbackvragenController extends Controller
 {
-    //laat feedbackvragen.blade.php zien
+    //laat feedbackvragen zien
     public function show()
     {
-        // Haal alle feedbackvragen op uit de database
-        $vragen = Feedbackvragen::all();
+        // Haal alle feedbackvragen op uit de database waarvoor de gebruiker nog geen antwoord heeft gegeven
+        $vragen = Feedbackvragen::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('userhasvragen')
+                ->whereRaw('userhasvragen.Vragen_idVragen = feedbackvragen.id')
+                ->where('userhasvragen.User_idUser', auth()->user()->id);
+        })->get();
 
         // Geef de feedbackvragen door aan de view 'Feedbackvragen'
         return view('vragen\Feedbackvragen', compact('vragen'));
     }
+
     public function showAlleVragen()
     {
         // Haal alle feedbackvragen op uit de database
         $vragen = Feedbackvragen::all();
-        // $meerkeuzevragen = Meerkeuzevragen::all();
-
-
 
         // Geef de feedbackvragen door aan de view 'Feedbackvragen'
         return view('vragen\Feedbackvragen', compact('vragen'));
@@ -87,11 +92,16 @@ class FeedbackvragenController extends Controller
         $vandaag = Carbon::today();
 
         // Feedbackvragen van vandaag
-        $recentNieuws = Nieuws::orderBy('created_at', 'desc')->take(3)->get();
-        $feedbackvragen = Feedbackvragen::orderBy('created_at', 'desc')->take(3)->get();
+        $recentNieuws = Nieuws::orderBy('created_at', 'desc')->take(1)->get();
+        $feedbackvragen = Feedbackvragen::orderBy('created_at', 'desc')->take(1)->get();
 
-        // Andere gegevens ophalen
-        $meerkeuzevragen = Meerkeuzevragen::all();
+        $meerkeuzevragen = Meerkeuzevragen::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('userhasmeerkeuzevraag')
+                ->whereRaw('userhasmeerkeuzevraag.Vragen_idVragen = meerkeuzevragen.id')
+                ->where('userhasmeerkeuzevraag.User_idUser', auth()->user()->id);
+        })->take(1)->get();
+
 
         return view('dashboard', compact('feedbackvragen', 'recentNieuws', 'meerkeuzevragen'));
     }
