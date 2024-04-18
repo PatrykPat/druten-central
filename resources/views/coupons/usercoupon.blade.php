@@ -15,7 +15,7 @@
             <p>gekocht op: {{ $coupon->created_at }}</p>
             <button onclick="toggleQrCode({{ $coupon->coupon->id }})">Toon QR-code</button>
             <div id="qrcode_{{ $coupon->coupon->id }}" style="display: none;">
-                {!! QrCode::generate("{{ $coupon->coupon->Waarde }}{{ $coupon->coupon->Eenheid }}{{ $coupon->coupon->id }}") !!}
+                {!! QrCode::generate("{{ $coupon->coupon->Waarde }}{{ $coupon->coupon->Eenheid }}{{ $coupon->id }}") !!}
             </div>
         </div><br>
     @endforeach
