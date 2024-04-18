@@ -12,8 +12,8 @@ class CouponController extends Controller
 {
     public function showShop()
     {
-        $coupons = Coupon::all();
 
+        $coupons = Coupon::with('gebruiker')->get();
         return view('coupons\shop', compact('coupons'));
     }
     public function show()
