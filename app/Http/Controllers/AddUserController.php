@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AddUser;
 use App\Models\User;
+use App\Models\Auth;
 
 class AddUserController extends Controller
 {
@@ -26,7 +27,7 @@ class AddUserController extends Controller
         ]);
 
         // Retrieve all users
-        $users = User::all()->except(Auth::id());
+        $users = User::all();
 
         // Pass the users data to the view
         return view('AddUser', compact('users'));

@@ -16,7 +16,7 @@
     <div class="sm:col-span-6">
       <label for="name" class="block text-sm font-medium text-gray-700"> naam: </label>
       <div class="mt-1">
-        <input type="text" id="name" name="name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+        <input placeholder="naam" type="text" id="name" name="name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
     </div>
       </div>
       @error('name') <span class="text-red-400 text-sm">{{ $message}}</span> @enderror
@@ -24,7 +24,7 @@
     <div class="sm:col-span-6">
       <label for="email" class="block text-sm font-medium text-gray-700"> email: </label>
       <div class="mt-1">
-        <input type="text" id="email" name="email" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+        <input  placeholder="gebruiker@gmail.com" type="text" id="email" name="email" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
         </div>
         <div class="sm:col-span-6">
                 <label for="role_id" class="block text-sm font-medium text-gray-700">Select Role:</label>
@@ -42,14 +42,14 @@
       <div class="sm:col-span-6">
       <label for="password" class="block text-sm font-medium text-gray-700"> password: </label>
       <div class="mt-1">
-        <input type="text" id="password" name="password" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+        <input type="text" placeholder="wachtwoord" id="password" name="password" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
         </div>
       @error('password') <span class="text-red-400 text-sm">{{ $message}}</span> @enderror
       </div>
       <div class="sm:col-span-6">
       <label for="postcode" class="block text-sm font-medium text-gray-700"> postcode: </label>
       <div class="mt-1">
-        <input type="text" id="postcode" name="postcode" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+        <input type="text" placeholder="0000AA" id="postcode" name="postcode" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
         </div>
       @error('postcode') <span class="text-red-400 text-sm">{{ $message}}</span> @enderror
       </div>

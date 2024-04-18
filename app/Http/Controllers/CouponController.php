@@ -12,52 +12,50 @@ class CouponController extends Controller
 {
     public function showShop()
     {
-
+        // deze functie haalt alle coupons op en laat ze zien op de shop pagina
         $coupons = Coupon::with('gebruiker')->get();
         return view('coupons\shop', compact('coupons'));
     }
     public function show()
     {
-        $user = Auth::user(); // Haal de huidige gebruiker op
-        $coupons = CouponHasUser::where('user_iduser', $user->id)->get(); // Haal de coupons op die bij de gebruiker horen
-
-        return view('coupons\usercoupon', compact('coupons'));
+        // laat alle coupons zien die bij de gebruiker horen
+        $user = Auth::user();
+        $gebruiker = Coupon::with('gebruiker')->get();
+        $coupons = CouponHasUser::where('user_iduser', $user->id)->get();
+        return view('coupons\usercoupon', compact('coupons', 'gebruiker'));
     }
     public function buy(Request $request)
     {
-        // Haal de huidige gebruiker op
         $user = Auth::user();
-
+        //haalt punten op van de gebruiker en checkt of de gebruiker genoeg heeft
+        // zo niet stopt de funcite en geeft het een error mee met waarom het niet is gelukt\
+        // zowel gaat het verder en geeft het een succes mee
         $couponPrijs = $request->input('Puntenprijs');
         $huidigePunten = $user->punten;
         $nieuwePunten = $huidigePunten - $couponPrijs;
 
-        // Zorg ervoor dat de gebruiker genoeg punten heeft om de coupon te kopen
         if ($nieuwePunten >= 0) {
-            // Update de punten van de gebruiker
             $user->punten = $nieuwePunten;
             $user->save();
 
-            // de coupon bij de user opslaan
             $coupons_has_user = new CouponHasUser();
             $coupons_has_user->user_iduser = $user->id;
             $coupons_has_user->coupons_idcoupons = $request->input('coupon_id');
             $coupons_has_user->save();
 
-            // Redirect naar de coupons pagina
             return redirect()->route('coupons.show')->with('success', 'Coupon succesvol gekocht!');
         } else {
-            // als gebruiker niet genoeg punten heeft, error teruggeven
             return redirect()->back()->with('error', 'Onvoldoende punten om de coupon te kopen.');
         }
     }
     public function form()
     {
+        //laat het createcoupon.blade bestand zien om coupons mee te maken
         return view('coupons\createcoupon');
     }
     public function send(Request $request)
     {
-        // Valideer de ingediende gegevens
+        //check of de gegevens voldoen aan de vereisten
         $validatedData = $request->validate([
             'omschrijving' => 'required|string',
             'waarde' => 'required|numeric',
@@ -65,11 +63,9 @@ class CouponController extends Controller
             'puntenprijs' => 'required|numeric',
             'einddatum' => 'required|date',
         ]);
-
-        // Maak een nieuwe instantie van het Coupon model
+        // maak een nieuwe coupon regel aan met de doorgestuurde gegevens
         $coupon = new Coupon();
         $user = Auth::user();
-        // Vul de eigenschappen van het model met de ingediende gegevens
         $coupon->omschrijving = $validatedData['omschrijving'];
         $coupon->waarde = $validatedData['waarde'];
         $coupon->eenheid = $validatedData['eenheid'];
@@ -77,10 +73,8 @@ class CouponController extends Controller
         $coupon->einddatum = $validatedData['einddatum'];
         $coupon->user_iduser = $user->id;
 
-        // Sla de coupon op in de database
         $coupon->save();
-
-        // Geef een succesbericht terug of leid de gebruiker door naar een andere pagina
+        // als alles goed gaat geeft het een succces bericht mee 
         return redirect()->route('coupons.form')->with('success', 'Coupon is succesvol opgeslagen.');
     }
 

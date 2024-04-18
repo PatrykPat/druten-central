@@ -10,8 +10,8 @@
 </div>
  @foreach ($coupons as $Coupon)
  <div class="coupon">
-    <br>te besteden in :{{ $Coupon->gebruiker->name}}<br>
-    {{ $Coupon->Omschrijving }}<br>
+    <br>te besteden in: {{ $Coupon->gebruiker->name}}<br>
+    beschrijving: {{ $Coupon->Omschrijving }}<br>
     waarde:{{ $Coupon->Waarde }}{{ $Coupon->Eenheid }} <br>
     prijs:{{ $Coupon->Puntenprijs }} punt(en)<br>
     <form action="{{ route('coupons.show') }}" method="post">

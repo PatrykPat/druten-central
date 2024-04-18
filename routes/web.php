@@ -64,6 +64,7 @@ Route::middleware(['auth', 'role:bedrijf'])->group(function () {
     Route::post('/createcoupons', [CouponController::class, 'send'])->name('coupons.send');
     Route::get('/createfeedback', [FeedbackvragenController::class, 'form'])->name('feedback.form');
     Route::post('/createfeedback', [FeedbackvragenController::class, 'send'])->name('feedback.send');
+    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
 
 /* ------------- End Nieuws Route ------------- */
@@ -85,7 +86,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt'])->name('feedbackantwoorden.showAnt');
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
-    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
 
 /* ------------- Routes alleen voor User ------------- */

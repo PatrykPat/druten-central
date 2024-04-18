@@ -15,7 +15,7 @@ class UserController extends Controller
         // Haal alle gebruikers en rollen op uit de database
         $users = User::all();
         $roles = Role::all();
-        
+
         // Geef de gebruikers en rollen door aan de view 'admin.users.index'
         return view('admin.index', compact('users', 'roles'));
     }
@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         // Haal alle rollen op uit de database
         $roles = Role::all();
-        
+
         // Geef de rollen door aan de view 'admin.users.create'
         return view('admin.create', compact('roles'));
     }
@@ -49,8 +49,8 @@ class UserController extends Controller
         ]);
 
         // Vind de rol op basis van de meegegeven rol-ID
-        $role = \Spatie\Permission\Models\Role::find($validated['role_id']);
-        
+        $role = Role::find($validated['role_id']);
+
         // Koppel de gebruiker aan de gevonden rol
         $user->syncRoles([$role]);
 

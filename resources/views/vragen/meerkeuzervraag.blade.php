@@ -5,7 +5,9 @@
  <div class="alert alert-success">
         {{ session('success') }}
     </div>
-
+<div class="alert alert-success">
+        {{ session('niks') }}
+    </div>
     <h1>Vragen en Antwoorden</h1>
 
 @foreach ($vragenMetAntwoorden as $vraag)

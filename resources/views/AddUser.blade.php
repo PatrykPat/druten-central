@@ -14,13 +14,13 @@
     @csrf
 
     <label for="name">Naam:</label><br>
-    <input type="text" id="name" name="name" value="{{ old('name') }}"><br>
+    <input placeholder="gebruiker" type="text" id="name" name="name" value="{{ old('name') }}"><br>
 
     <label for="password">Wachtwoord:</label><br>
-    <input type="password" id="password" name="password" value="{{ old('password') }}"><br>
+    <input placeholder="wachtwoord" type="password" id="password" name="password" value="{{ old('password') }}"><br>
 
     <label for="email">E-mail:</label><br>
-    <input type="email" id="email" name="email" value="{{ old('email') }}"><br>
+    <input placeholder="wachtwoord" type="email" id="email" name="email" value="{{ old('email') }}"><br>
 
     <label for="role">Rol:</label><br>
     <select id="role" name="role">
