@@ -7,19 +7,33 @@ use App\Models\Nieuws;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Auth;
+use Carbon\Carbon;
 
 class AgendaController extends Controller
 {
-    public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $data = Nieuws::whereDate('datum', '>=', $request->start)
-                  ->whereDate('datum', '<=', $request->end)
-                  ->get(['id', 'title', 'datum']);
 
-        return response()->json($data);
+    public function index()
+    {
+        $events = Nieuws::all();
+
+        return view('nieuws.nieuwsAgenda', compact('events'));
     }
 
-    return view('nieuws.nieuwsAgenda');
-}
+    public function showNieuwsItem($id)
+    {
+        // Logic to fetch details of the nieuws item with the provided ID
+        $nieuwsItem = Nieuws::find($id);
+      
+        if ($nieuwsItem) {
+          return response()->json([
+            'success' => true,
+            'data' => $nieuwsItem
+          ]);
+        } else {
+          return response()->json([
+            'success' => false,
+            'message' => 'Nieuws item not found.'
+          ], 404); // Error bericht
+        }
+    }
 }
