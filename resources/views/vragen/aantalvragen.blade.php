@@ -39,8 +39,6 @@
                 </div>
             </tbody>
         </table>
-
     </body>
-
     </html>
 </x-app-layout>

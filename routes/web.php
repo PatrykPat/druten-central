@@ -41,16 +41,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/nieuws/filterkalender', [NieuwsController::class, 'filterKalender'])->name('nieuws.filterkalender');
     Route::get('/nieuws/kalender', [NieuwsController::class, 'Kalender'])->name('nieuws.kalender');
     Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
-    // Route::get('/nieuws/agenda', [AgendaController::class, 'show'])->name('nieuws.agenda');
     Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
     Route::post('/nieuws/agenda-AJAX', [AgendaController::class, 'ajax']);
 });
-// Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
-//     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
-// });
-// Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
-// Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
-// Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
@@ -70,7 +63,7 @@ Route::middleware(['auth', 'role:bedrijf'])->group(function () {
 /* ------------- End Nieuws Route ------------- */
 
 
-
+// alle routes voor admin
 Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::resource('/', UserController::class);
     Route::resource('/roles', RoleController::class);

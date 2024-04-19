@@ -28,7 +28,21 @@ class Meerkeuzevragencontroller extends Controller
             'puntenTeVerdienen' => $request->input('punten'),
             'userID' => $userId,
         ]);
-        //maakt meerdere antwoorden aan die horen bij de vraag.
+        //dit controleert of er maar 1 antwoord is gegeven
+        $aantalCorrecteAntwoorden = 0;
+
+        foreach ($request->input('opties') as $optie) {
+            $tekst = $optie['tekst'];
+            $isCorrect = isset($optie['is_correct']) ? $optie['is_correct'] : 0;
+
+            if ($isCorrect) {
+                $aantalCorrecteAntwoorden++;
+                if ($aantalCorrecteAntwoorden > 1) {
+                    return back()->with('error', 'Je mag maar 1 antwoord kiezen.');
+                }
+            }
+        }
+        //als er maar 1 antwoord is doorgestuurd maakt de antwoorden aan
         foreach ($request->input('opties') as $optie) {
             $tekst = $optie['tekst'];
             $isCorrect = isset($optie['is_correct']) ? $optie['is_correct'] : 0;
@@ -68,7 +82,7 @@ class Meerkeuzevragencontroller extends Controller
         $vraagID = $request->input('vraag_id');
         $juisteAntwoorden = Antwoord::where('vraagID', $vraagID)->where('IsCorrect', true)->pluck('antwoordID')->toArray();
         $correct = array_diff($juisteAntwoorden, $geselecteerdeAntwoorden) === array_diff($geselecteerdeAntwoorden, $juisteAntwoorden);
-        //sla de poging op zodat e gebruiker het maar 1 keer kan proberen
+        //sla de poging op zodat de gebruiker het maar 1 keer kan proberen
         userhasmeerkeuzevraag::create([
             'User_idUser' => $user->id,
             'Vragen_idVragen' => $vraagID,

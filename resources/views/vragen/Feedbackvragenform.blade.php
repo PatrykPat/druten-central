@@ -20,7 +20,7 @@
     </style>
 
     <body>
- <h2>Formulier</h2>
+ <h2>maak een feedbackvraag</h2>
  <div class="alert alert-success">
         {{ session('success') }}
     </div>

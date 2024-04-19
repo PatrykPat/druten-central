@@ -15,6 +15,9 @@
                 {{ __('Dashboard') }}
             </h2>
         </x-slot>
+        <div class="alert alert-error">
+        {{ session('error') }}
+    </div>
         <form method="POST" action="{{ route('verwerk_vraag') }}">
             @csrf
 
@@ -22,7 +25,8 @@
             <input type="text" id="vraag" name="vraag" required>
             <br>
 
-            <label for="opties">Opties:</label>
+            <label for="opties">vink het juiste antwoord(en) aan. voer hier de opties in:
+            </label>
             <div id="opties-container">
                 <div class="optie">
                     <input type="text" name="opties[0][tekst]" required>

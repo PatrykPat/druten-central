@@ -45,8 +45,7 @@ class FeedbackvragenController extends Controller
         $users = User::all();
         $roles = Role::all();
         $antwoorden = UserHasVragen::with('gebruiker')->get();
-        $vragen = Feedbackvragen::all();
-
+        $vragen = Feedbackvragen::orderBy('id', 'desc')->get();
         return view('Feedbackantwoorden', compact('users', 'vragen', 'antwoorden'));
     }
 
