@@ -16,15 +16,16 @@ class NieuwsController extends Controller
         $roles = Role::all();
         $nieuws = Nieuws::with('gebruiker')->where('datum', '<', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
         $users = User::all();
-        return view('nieuws.nieuwsArchief',compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
+        return view('nieuws.nieuwsArchief', compact('nieuws', 'users'), ['users' => $users], ['nieuws' => $nieuws]);
     }
 
-    public function Kalender() {
+    public function Kalender()
+    {
         $users = User::all();
-    
+
         // Krijg nieuwsitems van vandaag of later dan vandaag
         $nieuws = Nieuws::with('gebruiker')->where('datum', '>=', date('Y-m-d'))->get(); // gebruik 'with' om eager loading te doen
-    
+
         return view('nieuws.nieuwsKalender', ['users' => $users, 'nieuws' => $nieuws]);
     }
 
@@ -135,7 +136,6 @@ class NieuwsController extends Controller
         $nieuws->whereDate('datum', '<', date('Y-m-d'));
 
         $filteredNieuws = $nieuws->get();
-
         return view('nieuws.nieuwsArchief', [
             'users' => $users,
             'nieuws' => $filteredNieuws,
@@ -168,7 +168,7 @@ class NieuwsController extends Controller
         ]);
     }
 
-    public function entriesLastThreeDays() 
+    public function entriesLastThreeDays()
     {
         $nieuws = Nieuws::orderBy('datum', 'desc')->take(3)->get();
 

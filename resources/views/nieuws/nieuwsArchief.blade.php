@@ -47,6 +47,7 @@
         <h4>description: {{$nieuwsitem->beschrijving}}</h4>
         <h4>date: {{$nieuwsitem->datum}}</h4>
         <h4>postcode: {{$nieuwsitem->postcode}}</h4>
+        <h4>foto: <img height="500px" width="auto" src="data:image/png;base64,{{ chunk_split(base64_encode($nieuwsitem->image)) }}" </h4>
         @auth
         @role('bedrijf')
         <!-- Edit Form -->

@@ -59,7 +59,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <p>welkom terug {{Auth::user()->name}}</p>
-                        de feedbackvragen van vandaag: <br>
+                         @if(count($meerkeuzevragen) > 0)
                         @foreach ($meerkeuzevragen as $vraag)
                             <form method="POST" action="{{ route('meerkeuzevragen.control') }}">
                             @csrf
@@ -78,7 +78,12 @@
                                 <button type="submit">Controleer antwoord</button>
                                 </form>
                         @endforeach
-                        @foreach($feedbackvragen as $vraag)
+                        @else
+                        <p>er zijn geen openstaande meerkeuzevragen</p>
+                        @endif
+                         @if(count($feedbackvragen) > 0)
+                            de feedbackvragen van vandaag: <br>
+                        @foreach($feedbackvragen as $vraag){
                         <!-- Een formulier voor het verwerken van het antwoord -->
                         <form method="POST" action="{{ route('verwerkantwoord') }}">
                             @csrf
@@ -107,7 +112,9 @@
                             </div>
                         </form>
                         @endforeach
-
+                        @else
+                        <p>er zijn geen feedbackvragen die je kan beantwoorden</p>
+                        @endif
                         <!-- Controleren of er nieuwsitems zijn -->
                         @if(count($recentNieuws) > 0)
                         <div class="nieuwscontainer">
@@ -126,7 +133,7 @@
                             @endforeach
                         </div>
                         @else
-                        <p>er zijn geen nieuws en of vragen voor nu</p>
+                        <p>er is geen nieuws</p>
                         @endif
                     </div>
                 </div>
