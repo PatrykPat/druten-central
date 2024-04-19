@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FeedbackvragenController;
 use App\Http\Controllers\AgendaController;
 use App\Models\Meerkeuzevragen;
+use App\Models\Nieuws;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NieuwsController;
@@ -43,7 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
     // Route::get('/nieuws/agenda', [AgendaController::class, 'show'])->name('nieuws.agenda');
     Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
-    Route::post('/nieuws/agenda-AJAX', [AgendaController::class, 'ajax']);});
+    Route::get('/nieuws/{id}', [AgendaController::class, 'showNieuwsItem']);
+    });
+    
 // Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
 //     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
 // });
