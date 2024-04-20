@@ -11,45 +11,43 @@
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
-    var events = @json($events); // Get events from controller
+    var events = @json($events); // Haal nieuws items van de controller
 
     var fullCalendarEvents = events.map(function(event) {
       return {
         title: event.title,
-        date: event.datum, // Assuming 'datum' field stores date in YYYY-MM-DD format
-        id: event.id // Using 'id' field for unique identifier (optional)
+        date: event.datum,
+        id: event.id
       };
     });
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       events: fullCalendarEvents,
-      // ... other options
       eventClick: function(info) {
-        // Handle click on an event
-        var clickedEventId = info.event.id; // Get the ID of the clicked event
+        // Functie voor het klikken op nieuws items
+        var clickedEventId = info.event.id; // Haal het id op van het nieuws item
 
         // Use AJAX to fetch details of the clicked event
+        // Gebruik AJAX om details op te halen van het geklikte nieuws item
         $.ajax({
-          url: "/nieuws/" + clickedEventId, // Replace with your route for retrieving news item by ID
+          url: "/nieuws/" + clickedEventId,
           method: "GET",
           success: function(response) {
             if (response.success) {
-              // Display details of the clicked news item (e.g., in a modal)
+              // Laat details zien van het geklikte nieuws item
               console.log("Clicked news item:", response.data);
               var beschrijving = response.data.beschrijving;
               var postcode = response.data.postcode;
-              // You can use these variables to display details in a modal or popup
 
-              // Example using a basic alert (replace with your preferred method)
+              // Laat nieuws zien in een alert 
               alert("Beschrijving: " + beschrijving + "\nPostcode: " + postcode);
             } else {
-              // Handle errors fetching news item details (optional)
               console.error(response.message);
             }
           },
           error: function(jqXHR, textStatus, errorThrown) {
-            // Handle AJAX errors (optional)
+            // AJAX error bericht
             console.error("Error fetching news item:", textStatus, errorThrown);
           }
         });

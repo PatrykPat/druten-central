@@ -14,6 +14,7 @@ class AgendaController extends Controller
 
     public function index()
     {
+      // Haal alles op van het Nieuws model, stuur het naar de view als events
         $events = Nieuws::all();
 
         return view('nieuws.nieuwsAgenda', compact('events'));
@@ -21,7 +22,7 @@ class AgendaController extends Controller
 
     public function showNieuwsItem($id)
     {
-        // Logic to fetch details of the nieuws item with the provided ID
+        // Logica om de nieuws items op te halen met het gegeven ID
         $nieuwsItem = Nieuws::find($id);
       
         if ($nieuwsItem) {
