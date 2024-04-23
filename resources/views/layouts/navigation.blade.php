@@ -30,6 +30,12 @@
                     </x-nav-link>
                     @endrole
 
+                    @role('user')
+                    <x-nav-link :href="route('nieuws.agenda')" :active="request()->routeIs('nieuws.agenda')">
+                        {{ __('Agenda') }}
+                    </x-nav-link>
+                    @endrole
+
                     @role('admin')
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
                         {{ __('users') }}

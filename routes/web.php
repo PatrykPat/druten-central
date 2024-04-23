@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/nieuws/filterkalender', [NieuwsController::class, 'filterKalender'])->name('nieuws.filterkalender');
     Route::get('/nieuws/kalender', [NieuwsController::class, 'Kalender'])->name('nieuws.kalender');
     Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
-    Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
+    Route::get('/nieuws/agenda', [AgendaController::class, 'index'])->name('nieuws.agenda');
     Route::get('/nieuws/{id}', [AgendaController::class, 'showNieuwsItem']);
     });
     
