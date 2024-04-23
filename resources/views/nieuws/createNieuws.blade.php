@@ -1,9 +1,9 @@
-<x-app-layout>
 <!-- Form voor het creëren van nieuwsitems -->
-<h1> Create Test </h1>
-
+<x-app-layout>
+    
+    <h1> Create Test </h1>
     <form method="post" action="{{ url('/newnieuws') }}" enctype="multipart/form-data">
-    @csrf
+        @csrf
 
         <label for="title">Title:</label>
         <input type="text" name="title" required>

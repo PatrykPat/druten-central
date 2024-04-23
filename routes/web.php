@@ -35,6 +35,9 @@ Route::get('/', [FeedbackVragenController::class, 'showAlles'])
 
 /* ------------- Nieuws Route ------------- */
 
+
+
+
 // Deze Routes zijn bereikbaar als je ingelogd bent
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
@@ -44,18 +47,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
     Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
     Route::get('/nieuws/{id}', [AgendaController::class, 'showNieuwsItem']);
-    });
-    
-// Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
-//     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
-// });
-// Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
-// Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
-// Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
+});
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-    Route::get('/nieuws/create', [NieuwsController::class, 'Create'])->name('nieuws.create');
+    Route::get('/create', [NieuwsController::class, 'Create'])->name('nieuws.create');
     Route::post('/newnieuws', [NieuwsController::class, 'store']);
     Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
     Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
@@ -67,7 +63,6 @@ Route::middleware(['auth', 'role:bedrijf'])->group(function () {
     Route::post('/createfeedback', [FeedbackvragenController::class, 'send'])->name('feedback.send');
     Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
-
 /* ------------- End Nieuws Route ------------- */
 
 
