@@ -373,8 +373,8 @@ class ComposerStaticInit1dbf45d99ad199c66ef4b1d55cc61255
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -618,6 +618,7 @@ class ComposerStaticInit1dbf45d99ad199c66ef4b1d55cc61255
         'App\\Models\\Nieuws' => __DIR__ . '/../..' . '/app/Models/Nieuws.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserHasVragen' => __DIR__ . '/../..' . '/app/Models/UserHasVragen.php',
+        'App\\Models\\userhasmeerkeuzevraag' => __DIR__ . '/../..' . '/app/Models/userhasmeerkeuzevraag.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

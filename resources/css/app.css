@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    --prime-color: #4FB96F; /*primaire kleur*/
+    --sec-color: #1CEC6F; /*secondaire kleur*/
+    --bg-top-color: #986B59; /*bovengradient van background*/
+    --bg-bottom-color: #5E8CB4; /*ondergradient van backgroundkleur*/
+}
