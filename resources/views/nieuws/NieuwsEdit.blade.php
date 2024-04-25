@@ -1,6 +1,10 @@
 <!-- Form voor editten -->
 <!-- Er staan al standaard values in -->
-<h1>Edit Nieuws Item</h1>
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Edit nieuws') }}
+        </h2>
+    </x-slot>
 
 <form method="post" action="{{ route('nieuws.update', $nieuwsitem->id) }}" enctype="multipart/form-data">
     @csrf

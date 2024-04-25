@@ -49,29 +49,33 @@
             <div class="flex items-center">
 
                 <!-- Navigation Links -->
-                <div class="space-x-8 p-10 ml-10 flex">
+                <div class="space-x-8 flex">
                     @role('user')
                     <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
                         <!-- {{ __('Nieuws Archief') }} -->
-                        <img src="{{ URL::to('/') }}/images/Nieuws.png" alt="Image" width="50px" height="50px"/>
+                        <img src="{{ URL::to('/') }}/images/Nieuws.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
 
                     <x-nav-link :href="route('nieuws.kalender')" :active="request()->routeIs('nieuws.kalender')">
                         <!-- {{ __('Nieuws Kalender') }} -->
-                        <img src="{{ URL::to('/') }}/images/calendar.png" alt="Image" width="50px" height="50px"/>
+                        <img src="{{ URL::to('/') }}/images/calendar.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
                     
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <!-- {{ __('Home') }} -->
-                        <img src="{{ URL::to('/') }}/images/home.png" alt="Image" width="50px" height="50px"/>
+                        <img src="{{ URL::to('/') }}/images/home.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
 
                     <x-nav-link :href="route('coupons.showShop')" :active="request()->routeIs('coupons.showShop')">
                         <!-- {{ __('Coupon shop') }} -->
-                        <img src="{{ URL::to('/') }}/images/coupon.png" alt="Image" width="50px" height="50px"/>
+                        <img src="{{ URL::to('/') }}/images/coupon.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('feedbackvragen.show')" :active="request()->routeIs('coupons.showShop')">
+                        <img src="{{ URL::to('/') }}/images/speech-bubble.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
 
-                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <!-- <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown>
                             <x-slot name="trigger">
                                 <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -95,7 +99,7 @@
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
-                    </div>
+                    </div> -->
                     @endrole
 
                     @role('admin')
@@ -103,7 +107,7 @@
                         {{ __('users') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <img src="{{ URL::to('/') }}/images/home.png" alt="Image" width="50px" height="50px"/>
                     </x-nav-link>
 

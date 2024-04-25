@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-8 pb-12">
         <!-- Dropdown form om nieuwsitems te filteren -->
         <form id="filterForm" action="{{ route('nieuws.filter') }}" class="m-6 bg-[color:var(--prime-color)] rounded-xl" method="GET">
             @csrf
@@ -35,42 +35,42 @@
 
         <!-- Foreach die alle nieuwsartikelen laat zien die van eerder dan vandaag zijn -->
         @foreach ($nieuws as $nieuwsitem)
-        <div>
-        <div class="p-6 text-black border rounded-3xl bg-white flex flex-col justify-center items-center ">
-            <div class="w-full p-3 justify-center flex">
-                @if ($nieuwsitem->image)
-                <div class="font-bold text-base block sm:flex ">
-                    <img class="w-full max-w-[300px] rounded-xl" src="data:image/png;base64,{{ chunk_split(base64_encode($nieuwsitem->image)) }}">
-                </div>
-                @endif
+            <div class="p-6 text-black border rounded-3xl bg-white flex flex-col justify-center items-center ">
+                <div class="w-full p-3 justify-center font-bold text-base block sm:flex ">
+                    @if ($nieuwsitem->image)
+                    <div class="font-bold text-base flex sm:flex justify-center ">
+                        <img class="w-full max-w-[300px] rounded-xl " src="data:image/png;base64,{{ chunk_split(base64_encode($nieuwsitem->image)) }}">
+                    </div>
+                    @endif
 
-                <div class="w-full p-3 flex flex-col">
-                    <h3 class="uppercase text-xl pb-2">{{$nieuwsitem->title}}</h3>
-                    <h4 class="capitalize pb-12">{{$nieuwsitem->beschrijving}}</h4>
-                    <h3>Gebruiker: @if ($nieuwsitem->gebruiker)
-                        {{ $nieuwsitem->gebruiker->name }}
-                            @else
-                                <p class="text-[#FF0000]">Geen gebruiker gevonden<p>
-                            @endif
-                    </h3>
-                    <h4>date: {{$nieuwsitem->datum}}</h4>
-                    <h4>postcode: {{$nieuwsitem->postcode}}</h4>
+                    <div class="w-full p-3 flex flex-col">
+                        <h3 class="uppercase text-xl pb-2">{{$nieuwsitem->title}}</h3>
+                        <h4 class="capitalize pb-12">{{$nieuwsitem->beschrijving}}</h4>
+                        <h3>Gebruiker: @if ($nieuwsitem->gebruiker)
+                            {{ $nieuwsitem->gebruiker->name }}
+                                @else
+                                    <p class="text-[#FF0000]">Geen gebruiker gevonden<p>
+                                @endif
+                        </h3>
+                        <h4>date: {{$nieuwsitem->datum}}</h4>
+                        <h4>postcode: {{$nieuwsitem->postcode}}</h4>
+                    </div>
                 </div>
+                @auth
+                    @role('bedrijf')
+                        <!-- Edit Form -->
+                        <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
+
+                        <!-- Delete Form -->
+                        <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
+                        </form>
+                    @endrole
+                @endauth
             </div>
-            @auth
-                @role('bedrijf')
-                    <!-- Edit Form -->
-                    <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
-
-                    <!-- Delete Form -->
-                    <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
-                    </form>
-                @endrole
-            @endauth
-        </div><br>
+            <br>
         @endforeach
 
         <!-- Link naar create form -->

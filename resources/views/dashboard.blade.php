@@ -1,36 +1,4 @@
 <x-app-layout>
-<style>
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 15px;
-  border-radius: 5px;  
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%; 
-  background: var(--sec-color);
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: var(--sec-color);
-  cursor: pointer;
-}
-
-</style>
     <body>
         <!-- header slot tevinden in layout/app.blade.php -->
         <x-slot name="header" class="bg-transparent">
@@ -80,7 +48,7 @@
                                 <h2 class="font-bold text-xl">De feedbackvragen van vandaag:</h2><br>
 
                                 @foreach($feedbackvragen as $vraag)
-                                <div class="py-6 w-full sm:w-full max-w-[600px]">
+                                <div class="p-6 w-full sm:w-full max-w-[600px]">
                                     <!-- Een formulier voor het verwerken van het antwoord -->
                                     <form method="POST" class="" action="{{ route('verwerkantwoord') }}">
 
@@ -90,9 +58,9 @@
                                         <!-- Verborgen veld om de vraag-ID door te geven -->
                                         <input type="hidden" name="vraag_id" value="{{ $vraag->id }}">
 
-                                        <div class="pb-4 font-bold text-base">
+                                        <div class="font-bold text-xl">
                                         <!-- Label voor het weergeven van de vraag -->
-                                            <label for="antwoord">{{ $vraag->beschrijving }}:</label>
+                                            <label for="antwoord">{{ $vraag->beschrijving }}?</label>
                                         </div>
 
                                         <div class="">
@@ -102,7 +70,7 @@
                                         <!-- Een schuifregelaar voor het beoordelen -->
                                         <div class="text-white  justify-center w-full p-3 bg-[var(--prime-color)] border-black rounded-xl">
                                             <p class="text-white">rating: 1-10</p>
-                                            <input type="range" class="w-full slider" id="rating" name="rating" required min="1" max="10" value="10"
+                                            <input type="range" class="w-full slider" id="rating" name="rating" min="1" max="10" value="10"
                                                 oninput="updateHiddenField(this.value)">
                                             <!-- Verborgen veld om de geselecteerde waarde van de schuifregelaar bij te houden -->
                                             <input type="hidden" id="hiddenValue" name="hiddenValue" value="10">
@@ -114,24 +82,22 @@
                                 </div>
                                 @endforeach
                             </div>
-
-                            @else
-                                <p>er zijn geen feedbackvragen die je kan beantwoorden</p>
-                            @endif
-
+                        @else
+                            <p>er zijn geen feedbackvragen die je kan beantwoorden</p>
+                        @endif
 
                         <!-- Controleren of er nieuwsitems zijn -->
                         @if(count($recentNieuws) > 0)
                         <div class="p-6 text-black border rounded-3xl bg-white flex flex-col justify-center items-center ">
                             <h3 class="font-bold text-xl">Nieuws</h3>
                             @foreach ($recentNieuws as $nieuwsitem)
-                            <div class="font-bold text-base block sm:flex ">
+                            <div class="font-bold text-base block sm:flex">
                                 
-                            @if ($nieuwsitem->image)
-                                <div class="font-bold text-base block sm:flex ">
-                                    <img class="w-full max-w-[300px] rounded-xl" src="data:image/png;base64,{{ chunk_split(base64_encode($nieuwsitem->image)) }}">
-                                </div>
-                            @endif
+                                @if ($nieuwsitem->image)
+                                    <div class="font-bold text-base block sm:flex">
+                                        <img class="w-full max-w-[300px] rounded-xl" src="data:image/png;base64,{{ chunk_split(base64_encode($nieuwsitem->image)) }}">
+                                    </div>
+                                @endif
 
                                 <div class="w-full p-3 flex flex-col">
                                     <h3 class="uppercase text-xl pb-2">{{$nieuwsitem->title}}</h3>

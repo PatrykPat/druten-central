@@ -1,6 +1,10 @@
 <x-app-layout>
 <!-- Form voor het creëren van nieuwsitems -->
-<h1> Create Test </h1>
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Create nieuws') }}
+        </h2>
+    </x-slot>
 
     <form method="post" action="{{ url('/newnieuws') }}" enctype="multipart/form-data">
     @csrf

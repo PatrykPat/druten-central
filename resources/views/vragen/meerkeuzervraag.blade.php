@@ -1,4 +1,10 @@
 <x-app-layout>
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Meerkeuzevraag') }}
+        </h2>
+    </x-slot>
+
     <div class="alert alert-danger">
         {{ session('error') }}
 </div>

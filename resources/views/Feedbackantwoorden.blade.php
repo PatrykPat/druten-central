@@ -6,9 +6,9 @@
                     <div class="flex justify-end"></div>
                     <ul role="list" class="divide-y divide-gray-100">
                         @foreach ($vragen as $vraag)
-                        @if ($vraag->user_userid == auth()->id())
-                        @foreach ($antwoorden as $antwoord)
-                        @if ($antwoord->Vragen_idVragen == $vraag->id)
+                            @if ($vraag->user_userid == auth()->id())
+                                @foreach ($antwoorden as $antwoord)
+                                    @if ($antwoord->Vragen_idVragen == $vraag->id)
                         <!-- Een lijstitem voor de weergave van vraag en bijbehorend antwoord -->
                         <li class="flex justify-between gap-x-6 py-5">
                             <!-- Gedeelte voor vraaginformatie -->
