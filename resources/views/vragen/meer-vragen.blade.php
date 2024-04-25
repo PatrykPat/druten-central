@@ -1,5 +1,9 @@
 <x-app-layout>
-    
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Alle vragen') }}
+        </h2>
+    </x-slot>
     <div class="py-12 w-full">
         @foreach($vragen as $vraag)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

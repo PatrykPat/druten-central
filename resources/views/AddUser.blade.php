@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Gebruiker maken') }}
+        </h2>
+    </x-slot>
 <body>
     <H1>maak account met role</H1>
-    <?php
-    ?>
     
     <form method="POST" action="{{ route('AddUser') }}">
     @csrf
