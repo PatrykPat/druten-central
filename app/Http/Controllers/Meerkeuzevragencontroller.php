@@ -8,31 +8,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\userhasmeerkeuzevraag;
+use Illuminate\Support\Facades\DB;
 
 class Meerkeuzevragencontroller extends Controller
 {
-    //functie om meerkeuzen.blade.php te laten zien
     public function show()
     {
+        //haalt alle meerkeuzevragen op
         $Meerkeuzevragen = Meerkeuzevragen::all();
         return view('vragen\Meerkeuzevragen', compact('Meerkeuzevragen'));
     }
-    //functie om vraag te sturen naar database
     public function verwerkvraag(Request $request)
     {
-        // pakt de user id die is ingelogd
+        //verwerkt alle gegevens en maakt een nieuwe meerkeuzevraag aan
         $userId = auth()->user()->id;
-        // maakt een nieuw record aan in meerkeuzevraag en vult met de gegevens vanuit de form
         $meerkeuzeVraag = Meerkeuzevragen::create([
             'vraag' => $request->input('vraag'),
-            'puntenTeVerdienen' => $request->input('punten'), // Hier wordt de punten correct ingevoerd
+            'puntenTeVerdienen' => $request->input('punten'),
             'userID' => $userId,
         ]);
+        //dit controleert of er maar 1 antwoord is gegeven
+        $aantalCorrecteAntwoorden = 0;
 
         foreach ($request->input('opties') as $optie) {
             $tekst = $optie['tekst'];
             $isCorrect = isset($optie['is_correct']) ? $optie['is_correct'] : 0;
-            // nieuw record voor antwoord
+
+            if ($isCorrect) {
+                $aantalCorrecteAntwoorden++;
+                if ($aantalCorrecteAntwoorden > 1) {
+                    return back()->with('error', 'Je mag maar 1 antwoord kiezen.');
+                }
+            }
+        }
+        //als er maar 1 antwoord is doorgestuurd maakt de antwoorden aan
+        foreach ($request->input('opties') as $optie) {
+            $tekst = $optie['tekst'];
+            $isCorrect = isset($optie['is_correct']) ? $optie['is_correct'] : 0;
             Antwoord::create([
                 'vraagID' => $meerkeuzeVraag->id,
                 'AntwoordTekst' => $tekst,
@@ -45,26 +58,41 @@ class Meerkeuzevragencontroller extends Controller
 
     public function showvraag()
     {
-        $vragenMetAntwoorden = Meerkeuzevragen::with('antwoorden')->get();
+        //haalt alle vragen op die nog niet zijn beantwoord
+        $vragenMetAntwoorden = Meerkeuzevragen::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('userhasmeerkeuzevraag')
+                ->whereRaw('userhasmeerkeuzevraag.Vragen_idVragen = meerkeuzevragen.id')
+                ->where('userhasmeerkeuzevraag.User_idUser', auth()->user()->id);
+        })->get();
+
+
         return view('vragen\meerkeuzervraag', compact('vragenMetAntwoorden'));
     }
     public function control(Request $request)
     {
+        if ($request->input('antwoord') === null) {
+            return back()->with('niks', 'je moet wel een antwoord kiezen.');
+        }
         $user = Auth::user();
+        //sla het geselcteerde antwoord op in een variabele
         $geselecteerdeAntwoorden = $request->input('antwoord');
-
-        // Haal de juiste antwoorden op voor de vraag
+        //dit haalt eerst de vraag op. vervolgens checkt hij wat het juiste antwoord op die vraag is
+        // tenslotte checkt hij of het geselecteerde antwoord hetzelfde is als het juiste antwoord
         $vraagID = $request->input('vraag_id');
         $juisteAntwoorden = Antwoord::where('vraagID', $vraagID)->where('IsCorrect', true)->pluck('antwoordID')->toArray();
-        // Controleer goede antwoord
         $correct = array_diff($juisteAntwoorden, $geselecteerdeAntwoorden) === array_diff($geselecteerdeAntwoorden, $juisteAntwoorden);
-
+        //sla de poging op zodat de gebruiker het maar 1 keer kan proberen
+        userhasmeerkeuzevraag::create([
+            'User_idUser' => $user->id,
+            'Vragen_idVragen' => $vraagID,
+        ]);
+        //als de gebruiker het goed heeft krijgt hij punten erbij
+        // zo niet krijgt hij niks
         if ($correct) {
             $vraag = Meerkeuzevragen::find($vraagID);
             $puntenTeVerdienen = $vraag->puntenTeVerdienen;
-            //zoekt het id van de gebruiker op
             $huidigePunten = $user->punten;
-            //telt de huidige punten op met de verdiende punten
             $nieuwePunten = $huidigePunten + $puntenTeVerdienen;
             $user->punten = $nieuwePunten;
             $user->save();

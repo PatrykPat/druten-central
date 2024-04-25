@@ -1,20 +1,19 @@
 <x-app-layout>
 
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-</head>
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Meerkeuzevragen') }}
+        </h2>
+    </x-slot>
     <body>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard') }}
             </h2>
         </x-slot>
+        <div class="alert alert-error">
+        {{ session('error') }}
+    </div>
         <form method="POST" action="{{ route('verwerk_vraag') }}">
             @csrf
 
@@ -22,7 +21,8 @@
             <input type="text" id="vraag" name="vraag" required>
             <br>
 
-            <label for="opties">Opties:</label>
+            <label for="opties">vink het juiste antwoord(en) aan. voer hier de opties in:
+            </label>
             <div id="opties-container">
                 <div class="optie">
                     <input type="text" name="opties[0][tekst]" required>

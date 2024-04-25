@@ -18,4 +18,8 @@ class Coupon extends Model
         return $this->hasMany(CouponHasUser::class, 'id', 'id');
     }
 
+    public function gebruiker()
+    {
+        return $this->belongsTo(User::class, 'user_iduser');
+    }
 }

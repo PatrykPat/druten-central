@@ -27,5 +27,31 @@ class CouponHasUserSeeder extends Seeder
             'user_iduser' => 3,
             'coupons_idcoupons' => 3,
         ]);
+
+        CouponHasUser::create([
+            'user_iduser' => 6,
+            'coupons_idcoupons' => 1,
+        ]);
+        CouponHasUser::create([
+            'user_iduser' => 6,
+            'coupons_idcoupons' => 2,
+        ]);
+        CouponHasUser::create([
+            'user_iduser' => 6,
+            'coupons_idcoupons' => 3,
+        ]);
+
+        CouponHasUser::create([
+            'user_iduser' => 7,
+            'coupons_idcoupons' => 1,
+        ]);
+        CouponHasUser::create([
+            'user_iduser' => 7,
+            'coupons_idcoupons' => 2,
+        ]);
+        CouponHasUser::create([
+            'user_iduser' => 7,
+            'coupons_idcoupons' => 3,
+        ]);
     }
 }

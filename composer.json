@@ -11,8 +11,9 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "simplesoftwareio/simple-qrcode": "~4",
         "spatie/laravel-permission": "^6.3",
-        "tightenco/ziggy": "^1.8"
+        "tightenco/ziggy": "^1.8",
         "simplesoftwareio/simple-qrcode": "^4.1"
     },
     "require-dev": {

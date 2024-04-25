@@ -1,26 +1,13 @@
 <x-app-layout>
 
-    <!DOCTYPE html>
-    <html lang="en">
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Feedbackvragenformulier') }}
+        </h2>
+    </x-slot>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Overzicht van beantwoorde vragen</title>
-    </head>
-    <style>
-        td {
-            border: 1px solid black;
-        }
-
-        td {
-            padding: 10px;
-            /* Voeg padding toe aan de cel voor extra ruimte */
-        }
-    </style>
-
-    <body>
- <h2>Formulier</h2>
+<body>
+ <h2>maak een feedbackvraag</h2>
  <div class="alert alert-success">
         {{ session('success') }}
     </div>

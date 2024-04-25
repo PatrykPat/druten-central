@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FeedbackvragenController;
 use App\Http\Controllers\AgendaController;
 use App\Models\Meerkeuzevragen;
+use App\Models\Nieuws;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NieuwsController;
@@ -34,26 +35,25 @@ Route::get('/', [FeedbackVragenController::class, 'showAlles'])
 
 /* ------------- Nieuws Route ------------- */
 
+
+
+
 // Deze Routes zijn bereikbaar als je ingelogd bent
-Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/nieuws/archief',[NieuwsController::class, 'Index'])->name('nieuws.archief');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
     Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
     Route::get('/nieuws/filterkalender', [NieuwsController::class, 'filterKalender'])->name('nieuws.filterkalender');
     Route::get('/nieuws/kalender', [NieuwsController::class, 'Kalender'])->name('nieuws.kalender');
     Route::get('/nieuws/recent', [NieuwsController::class, 'entriesLastThreeDays'])->name('nieuws.recent');
-    // Route::get('/nieuws/agenda', [AgendaController::class, 'show'])->name('nieuws.agenda');
-    Route::get('/nieuws/agenda', [AgendaController::class, 'index']);
-    Route::post('/nieuws/agenda-AJAX', [AgendaController::class, 'ajax']);});
-// Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
-//     Route::get('/nieuws/archief', [NieuwsController::class, 'Index'])->name('nieuws.archief');
-// });
-// Route::get('/nieuws/filter', [NieuwsController::class, 'filter'])->name('nieuws.filter');
-// Route::get('/nieuws/filteragenda', [NieuwsController::class, 'filterAgenda'])->name('nieuws.filteragenda');
-// Route::get('/nieuws/agenda', [NieuwsController::class, 'Agenda'])->name('nieuws.agenda');
+    Route::get('/nieuws/agenda', [AgendaController::class, 'index'])->name('nieuws.agenda');
+    Route::get('/nieuws/{id}', [AgendaController::class, 'showNieuwsItem']);
+});
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
+// hier niks maken met /nieuws/[wat jij hier wilt hebben staan]
+// dit gaat in conflict met de laatste routing in het blok hierboven
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
-    Route::get('/nieuws/create', [NieuwsController::class, 'Create'])->name('nieuws.create');
+    Route::get('/create', [NieuwsController::class, 'Create'])->name('nieuws.create');
     Route::post('/newnieuws', [NieuwsController::class, 'store']);
     Route::delete('/nieuws/{nieuws}', [NieuwsController::class, 'destroy'])->name('nieuws.destroy');
     Route::get('/nieuws/{nieuws}/NieuwsEdit', [NieuwsController::class, 'edit'])->name('nieuws.NieuwsEdit');
@@ -63,12 +63,12 @@ Route::middleware(['auth', 'role:bedrijf'])->group(function () {
     Route::post('/createcoupons', [CouponController::class, 'send'])->name('coupons.send');
     Route::get('/createfeedback', [FeedbackvragenController::class, 'form'])->name('feedback.form');
     Route::post('/createfeedback', [FeedbackvragenController::class, 'send'])->name('feedback.send');
+    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
-
 /* ------------- End Nieuws Route ------------- */
 
 
-
+// alle routes voor admin
 Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::resource('/', UserController::class);
     Route::resource('/roles', RoleController::class);
@@ -84,7 +84,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/feedbackvragen/antwoorden', [FeedbackvragenController::class, 'showAnt'])->name('feedbackantwoorden.showAnt');
     Route::post('/dashboard', [FeedbackvragenController::class, 'verwerkAntwoord'])->name('verwerkantwoord');
     Route::post('/', [Meerkeuzevragencontroller::class, 'verwerkvraag'])->name('verwerk_vraag');
-    Route::get('/overzicht-beantwoorde-vragen', [AantalvragenController::class, 'overzichtBeantwoordeVragen'])->name('aantalvragen');
 });
 
 /* ------------- Routes alleen voor User ------------- */

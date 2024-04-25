@@ -1,26 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Gebruiker maken') }}
+        </h2>
+    </x-slot>
 <body>
     <H1>maak account met role</H1>
-    <?php
-    ?>
     
     <form method="POST" action="{{ route('AddUser') }}">
     @csrf
 
     <label for="name">Naam:</label><br>
-    <input type="text" id="name" name="name" value="{{ old('name') }}"><br>
+    <input placeholder="gebruiker" type="text" id="name" name="name" value="{{ old('name') }}"><br>
 
     <label for="password">Wachtwoord:</label><br>
-    <input type="password" id="password" name="password" value="{{ old('password') }}"><br>
+    <input placeholder="wachtwoord" type="password" id="password" name="password" value="{{ old('password') }}"><br>
 
     <label for="email">E-mail:</label><br>
-    <input type="email" id="email" name="email" value="{{ old('email') }}"><br>
+    <input placeholder="wachtwoord" type="email" id="email" name="email" value="{{ old('email') }}"><br>
 
     <label for="role">Rol:</label><br>
     <select id="role" name="role">

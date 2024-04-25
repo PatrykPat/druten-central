@@ -1,90 +1,61 @@
 <x-app-layout>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
 <html>
-	<head>
-		<title>How to Create Event Calendar in Laravel 10 - Techsolutionstuff.com</title>
-		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-	</head>
-	<body>
-		<div class="container">
-			<div id='calendar'></div>
-		</div>
-		<script>
-            console.log('Before JS');
-			$(document).ready(function () {
-			   
-			var SITEURL = "{{ url('/') }}";
-			  
-			$.ajaxSetup({
-			    headers: {
-			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			    }
-			});
+<div id='calendar'></div>
 
-			var calendar = $('#calendar').fullCalendar({
-			    editable: true,
-			    events: SITEURL + "/nieuws/agenda",
-			    displayEventTime: false,
-			    editable: true,
-			    eventRender: function (event, element, view) {
-                    if (event.allDay === true) {
-                        event.allDay = true;
-                    } else {
-                        event.allDay = false;
-                    }
-                },
-			    selectable: true,
-			    selectHelper: true,
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
 
-			    select: function (start, end, allDay) {	
-                    console.log('after select function');                   
-                    var title = prompt('Event Title:');
-                    if (title) {
-                    var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                    var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+    var events = @json($events); // Haal nieuws items van de controller
 
-                    console.log('Before AJAX request');
+    var fullCalendarEvents = events.map(function(event) {
+      return {
+        title: event.title,
+        date: event.datum,
+        id: event.id
+      };
+    });
 
-                    $.ajax({
-                        url: SITEURL + "/nieuws/agenda-AJAX",
-                        data: {
-                            title: title,
-                            start: start,
-                            type: 'add'
-                        },
-                        type: "POST",
-                        success: function (data) {
-                            displayMessage("Event Created Successfully");
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: fullCalendarEvents,
+      eventClick: function(info) {
+        // Functie voor het klikken op nieuws items
+        var clickedEventId = info.event.id; // Haal het id op van het nieuws item
 
-                            calendar.fullCalendar('renderEvent', {
-                                id: data.id,
-                                title: title,
-                                start: start,
-                                end: start, // Use the same start date for end date
-                                allDay: allDay
-                            }, true);
+        // Use AJAX to fetch details of the clicked event
+        // Gebruik AJAX om details op te halen van het geklikte nieuws item
+        $.ajax({
+          url: "/nieuws/" + clickedEventId,
+          method: "GET",
+          success: function(response) {
+            if (response.success) {
+              // Laat details zien van het geklikte nieuws item
+              console.log("Clicked news item:", response.data);
+              var beschrijving = response.data.beschrijving;
+              var postcode = response.data.postcode;
 
-                            calendar.fullCalendar('unselect');
-                        }
-                    });
-                    
-                    }
-			    },
-			 
-			});			 
-			});
-			 
-			function displayMessage(message) {
-			    toastr.success(message, 'Event');
-			} 
-			  
-		</script>
-	</body>
+              // Laat nieuws zien in een alert 
+              alert("Beschrijving: " + beschrijving + "\nPostcode: " + postcode);
+            } else {
+              console.error(response.message);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // AJAX error bericht
+            console.error("Error fetching news item:", textStatus, errorThrown);
+          }
+        });
+      }
+    });
+
+    calendar.render();
+  });
+</script>
 </html>
 </x-app-layout>
