@@ -56,7 +56,7 @@
                         <img src="{{ URL::to('/') }}/images/Nieuws.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
 
-                    <x-nav-link :href="route('nieuws.kalender')" :active="request()->routeIs('nieuws.kalender')">
+                    <x-nav-link :href="route('nieuws.agenda')" :active="request()->routeIs('nieuws.agenda')">
                         <!-- {{ __('Nieuws Kalender') }} -->
                         <img src="{{ URL::to('/') }}/images/calendar.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>

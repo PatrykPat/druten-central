@@ -90,7 +90,7 @@ class FeedbackvragenController extends Controller
                 ->from('userhasvragen')
                 ->whereRaw('userhasvragen.Vragen_idVragen = feedbackvragen.id')
                 ->where('userhasvragen.User_idUser', auth()->user()->id);
-        })->get();
+        })->take(1)->get();
         //pakt de meest recente meerkeuzevraag die nog niet is beantwoord 
         $meerkeuzevragen = Meerkeuzevragen::whereNotExists(function ($query) {
             $query->select(DB::raw(1))
