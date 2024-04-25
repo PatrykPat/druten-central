@@ -38,13 +38,13 @@ class FeedbackSeeder extends Seeder
             'title' => 'vraag 4',
             'beschrijving' => 'wat zou de plus kunnen doen om beter te zijn dan de jumbo',
             'puntenTeVerdienen' => 5,
-            'user_userid' => 4,
+            'user_userid' => 5,
         ]);
         feedbackvragen::create([
             'title' => 'vraag 5',
             'beschrijving' => 'wat kan er beter aan de plus',
             'puntenTeVerdienen' => 1,
-            'user_userid' => 4,
+            'user_userid' => 5,
         ]);
     }
 }

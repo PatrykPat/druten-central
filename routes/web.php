@@ -50,6 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // Deze routes zijn beschikbaar als je een bedrijf bent
+// hier niks maken met /nieuws/[wat jij hier wilt hebben staan]
+// dit gaat in conflict met de laatste routing in het blok hierboven
 Route::middleware(['auth', 'role:bedrijf'])->group(function () {
     Route::get('/create', [NieuwsController::class, 'Create'])->name('nieuws.create');
     Route::post('/newnieuws', [NieuwsController::class, 'store']);
