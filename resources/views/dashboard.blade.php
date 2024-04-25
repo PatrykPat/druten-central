@@ -1,7 +1,5 @@
 <x-app-layout>
-
 <style>
-
 .slider {
   -webkit-appearance: none;
   width: 100%;
@@ -32,10 +30,10 @@
   cursor: pointer;
 }
 
-    </style>
+</style>
     <body>
         <!-- header slot tevinden in layout/app.blade.php -->
-        <x-slot name="header" class="bg-transparent ">
+        <x-slot name="header" class="bg-transparent">
             <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
                 {{ __('Home') }}
             </h2>
@@ -124,12 +122,16 @@
 
                         <!-- Controleren of er nieuwsitems zijn -->
                         @if(count($recentNieuws) > 0)
-                        <div class=" text-black border rounded-3xl bg-white flex flex-col justify-center items-center ">
+                        <div class="p-6 text-black border rounded-3xl bg-white flex flex-col justify-center items-center ">
+                            <h3 class="font-bold text-xl">Nieuws</h3>
                             @foreach ($recentNieuws as $nieuwsitem)
                             <div class="font-bold text-base block sm:flex ">
-                                <div class="w-full p-3 justify-center flex">
+                                
+                            @if ($nieuwsitem->image)
+                                <div class="font-bold text-base block sm:flex ">
                                     <img class="w-full max-w-[300px] rounded-xl" src="data:image/png;base64,{{ chunk_split(base64_encode($nieuwsitem->image)) }}">
                                 </div>
+                            @endif
 
                                 <div class="w-full p-3 flex flex-col">
                                     <h3 class="uppercase text-xl pb-2">{{$nieuwsitem->title}}</h3>
