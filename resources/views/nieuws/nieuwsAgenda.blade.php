@@ -36,7 +36,7 @@
           success: function(response) {
             if (response.success) {
               // Laat details zien van het geklikte nieuws item
-              console.log("Clicked news item:", response.data);
+              console.log("Nieuws item:", response.data);
               var beschrijving = response.data.beschrijving;
               var postcode = response.data.postcode;
 

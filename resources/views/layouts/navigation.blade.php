@@ -151,13 +151,57 @@
 
 
     <!-- Primary Navigation Menu groot scherm -->
-    <div class="z-50 bg-[color:var(--prime-color)] inset-x-0 hidden fixed justify-center lg:flex shadow-md top-0 px-8">
+    <div class="z-50 bg-[color:var(--prime-color)] inset-x-0 hidden fixed justify-between lg:flex shadow-md top-0 px-8 ">
+    <div class="z-50 flex items-center lg:block">
+                <button @click="open = ! open"
+                    class="inline-flex m-3 items-center justify-center p-2 rounded-md text-black bg-white hover:text-[#FF0000] hover:bg-white focus:outline-none focus:bg-white transition duration-150 ease-in-out">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation dropdown menu -->
+            <div :class="{'block': open, 'hidden': ! open}" class="z-50 adsolute top-0 ">
+                <div class="pt-4 ml-6 pb-1 bg-white absolute rounded-md w-[50%] max-w-[250px] left-0 top-20">
+                    <div class="px-4 w-full">
+                        <div class="font-medium text-base text-black"><p class="font-bold text-lg">{{ Auth::user()->name }}</p></div>
+                        <div class="font-medium text-sm text-black"><p class="font-bold">Aantal punten: {{ Auth::user()->punten }}</p></div>
+                    </div>
+
+                    <div class="mt-3 space-y-1">
+                        <x-responsive-nav-link :href="route('dashboard')" >
+                            {{ __('Home')}}
+                        </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Profiel') }}
+                        </x-responsive-nav-link>
+                        
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </div>
+                </div>
+            </div>
         <div class="flex justify-center self-center h-16 max-w-4xl">
             <div class="flex">
 
+
+            
+
                 <!-- Navigation Links -->
                 <div class="space-x-8 ml-10 flex">
-                    @role('users')
+                    @role('user')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
@@ -175,11 +219,11 @@
                     </x-nav-link>
                     @endrole
 
-                    @role('user')
+                    <!-- @role('user')
                     <x-nav-link :href="route('nieuws.kalender')" :active="request()->routeIs('nieuws.kalender')">
                         {{ __('Nieuws Kalender') }}
                     </x-nav-link>
-                    @endrole
+                    @endrole -->
 
                     @role('admin')
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
@@ -234,6 +278,8 @@
                         {{ __(' create feedback') }}
                     </x-nav-link>
                     @endrole
+
+                    
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @role('user')

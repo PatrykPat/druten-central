@@ -8,13 +8,14 @@
     <body>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard') }}
+                {{ __('Maak meerkeuzevraag') }}
             </h2>
         </x-slot>
         <div class="alert alert-error">
         {{ session('error') }}
     </div>
-        <form method="POST" action="{{ route('verwerk_vraag') }}">
+    <div class="p-4 mb-6 border rounded-3xl bg-white flex flex-col justify-center items-center">
+        <form method="POST"  action="{{ route('verwerk_vraag') }}">
             @csrf
 
             <label for="vraag">Vraag:</label>
@@ -45,6 +46,7 @@
             <input type="number" id="punten" name="punten" required><br>
             <input type="submit" value="Verstuur">
         </form>
+            </div>
 </body>
     </html>
 </x-app-layout>
