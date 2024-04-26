@@ -34,7 +34,7 @@
 
                                         <div class="">
                                         <!-- Invoerveld voor het beantwoorden van de vraag -->
-                                            <input type="text" maxlength="40" placeholder="Jouw antwoord..." class="text-white mt-6 mb-3 p-3 placeholder:text-white justify-center max-w-8 inline-block w-full h-12 bg-[var(--prime-color)] border-none rounded-xl" id="antwoord" name="antwoord" required>
+                                            <input type="text" maxlength="40" placeholder="Jouw antwoord..." class="text-white mt-6 mb-3 p-3 placeholder:text-white justify-center inline-block w-full h-12 bg-[var(--prime-color)] border-none rounded-xl" id="antwoord" name="antwoord" required>
                                         </div>
                                         <!-- Een schuifregelaar voor het beoordelen -->
                                         <div class="text-white  justify-center w-full p-3 bg-[var(--prime-color)] border-black rounded-xl">

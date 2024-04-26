@@ -39,7 +39,7 @@
 
                         <!--melding dat er geen berichten zijn-->
                         @else
-                            <p>er zijn geen openstaande meerkeuzevragen</p>
+                            <p class="p-4 mb-6 border rounded-3xl bg-white flex flex-col justify-center items-center">er zijn geen openstaande meerkeuzevragen</p>
                         @endif
 
                         <!-- feedbackvraag loop-->
@@ -65,7 +65,7 @@
 
                                         <div class="">
                                         <!-- Invoerveld voor het beantwoorden van de vraag -->
-                                            <input type="text" maxlength="40" placeholder="Jouw antwoord..." class="text-white mt-6 mb-3 p-3 placeholder:text-white justify-center max-w-8 inline-block w-full h-12 bg-[var(--prime-color)] border-none rounded-xl" id="antwoord" name="antwoord" required>
+                                            <input type="text" maxlength="40" placeholder="Jouw antwoord..." class="text-white mt-6 mb-3 p-3 placeholder:text-white justify-center inline-block w-full h-12 bg-[var(--prime-color)] border-none rounded-xl" id="antwoord" name="antwoord" required>
                                         </div>
                                         <!-- Een schuifregelaar voor het beoordelen -->
                                         <div class="text-white  justify-center w-full p-3 bg-[var(--prime-color)] border-black rounded-xl">
@@ -83,7 +83,7 @@
                                 @endforeach
                             </div>
                         @else
-                            <p>er zijn geen feedbackvragen die je kan beantwoorden</p>
+                            <p class="p-4 mb-6 border rounded-3xl bg-white flex flex-col justify-center items-center">er zijn geen feedbackvragen die je kan beantwoorden</p>
                         @endif
 
                         <!-- Controleren of er nieuwsitems zijn -->
