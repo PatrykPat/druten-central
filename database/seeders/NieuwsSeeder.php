@@ -14,28 +14,36 @@ class NieuwsSeeder extends Seeder
      *
      * @return void
      */
+    
     public function run()
     {
+
+        $file = file_get_contents(__DIR__ . '/images/druten-brand.jpg');
+        $image = Image::make($file);
+
         Nieuws::create([
             'user_iduser' => 2,
-            'title' => "er is brand",
-            'beschrijving' => 'er is een hele grootte brand bij de plaatstelijke albert hijen',
+            'title' => "Er is brand",
+            'beschrijving' => 'Er is een hele grootte brand bij de plaatstelijke albert hijen',
             'datum' => Carbon::createFromDate(2025 - 04 - 03),
-            'postcode' => "4003BC",
+            'image' => $image,
+            'postcode' => "4005BF",
         ]);
+
         Nieuws::create([
             'user_iduser' => 2,
-            'title' => "de dader van de brand",
-            'beschrijving' => 'de dader van de brand bleek een jongen te zijn die werkzaam was voor de jumbo',
+            'title' => "De dader van de brand",
+            'beschrijving' => 'De dader van de brand bleek een jongen te zijn die werkzaam was voor de jumbo',
             'datum' => Carbon::createFromDate(2025 - 04 - 03),
-            'postcode' => "4003BC",
+            'postcode' => "4003KL",
         ]);
+
         Nieuws::create([
             'user_iduser' => 2,
-            'title' => "rechtzaak brand",
-            'beschrijving' => 'er is nu een rechtzaak gestart tegen de brandstichter van de alber hijen',
+            'title' => "Rechtzaak brand",
+            'beschrijving' => 'Er is nu een rechtzaak gestart tegen de brandstichter van de alber hijen',
             'datum' => Carbon::createFromDate(2025 - 04 - 03),
-            'postcode' => "4003BC",
+            'postcode' => "4006VF",
         ]);
     }
 }

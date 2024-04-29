@@ -17,65 +17,65 @@ class AntwoordSeeder extends Seeder
     {
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 'Olifant',
+            'AntwoordTekst' => 'Boven-leeuwen',
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 'Krokodil',
+            'AntwoordTekst' => 'Amsterdam',
             'IsCorrect' => 0,
         ]);
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 'Kat',
+            'AntwoordTekst' => 'Afferden',
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 'Slang',
+            'AntwoordTekst' => 'Puiflijk',
             'IsCorrect' => 0,
         ]);
 
 
         Antwoord::create([
             'vraagID' => 2,
-            'AntwoordTekst' => "Rood",
+            'AntwoordTekst' => "~19.500",
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 2,
-            'AntwoordTekst' => "Geel",
-            'IsCorrect' => 1,
-        ]);
-        Antwoord::create([
-            'vraagID' => 2,
-            'AntwoordTekst' => "Groen",
+            'AntwoordTekst' => "~190.500",
             'IsCorrect' => 0,
         ]);
         Antwoord::create([
             'vraagID' => 2,
-            'AntwoordTekst' => "Blauw",
-            'IsCorrect' => 1,
+            'AntwoordTekst' => "15.147",
+            'IsCorrect' => 0,
+        ]);
+        Antwoord::create([
+            'vraagID' => 2,
+            'AntwoordTekst' => "~25.000",
+            'IsCorrect' => 0,
         ]);
 
         Antwoord::create([
             'vraagID' => 3,
-            'AntwoordTekst' => "Frankrijk",
-            'IsCorrect' => 0,
-        ]);
-        Antwoord::create([
-            'vraagID' => 3,
-            'AntwoordTekst' => "Polen",
+            'AntwoordTekst' => "Jumbo",
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 3,
-            'AntwoordTekst' => "Nederland",
+            'AntwoordTekst' => "Albert Heijn",
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 3,
-            'AntwoordTekst' => "Zwitserland",
+            'AntwoordTekst' => "Blokker",
+            'IsCorrect' => 1,
+        ]);
+        Antwoord::create([
+            'vraagID' => 3,
+            'AntwoordTekst' => "Shoeby",
             'IsCorrect' => 1,
         ]);
     }

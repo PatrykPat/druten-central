@@ -16,17 +16,17 @@ class MeerkeuzeSeeder extends Seeder
     public function run()
     {
         Meerkeuzevragen::create([
-            'vraag' => 'Welke van de volgende dieren zijn zoogdieren',
+            'vraag' => 'Welke van de volgende plaatsen grenzen aan Druten',
             'puntenTeVerdienen' => 50,
             'userID' => 2,
         ]);
         Meerkeuzevragen::create([
-            'vraag' => 'Welke van de volgende kleuren zijn primaire kleuren?',
+            'vraag' => 'hoeveel inwoners heeft Druten',
             'puntenTeVerdienen' => 5,
             'userID' => 2,
         ]);
         Meerkeuzevragen::create([
-            'vraag' => 'Welke van de volgende landen grenzen aan Duitsland',
+            'vraag' => 'Welke van de volgende winkels zijn in Druten',
             'puntenTeVerdienen' => 80,
             'userID' => 2,
         ]);
