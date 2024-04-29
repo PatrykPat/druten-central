@@ -1,4 +1,4 @@
-<x-slot name="header" class="bg-transparent">
+<!-- <x-slot name="header" class="bg-transparent">
         <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
             {{ __('Gebruiker maken') }}
         </h2>
@@ -33,4 +33,4 @@
 
     
 </body>
-</html>
+</html> -->

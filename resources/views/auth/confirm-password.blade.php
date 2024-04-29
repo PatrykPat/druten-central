@@ -1,6 +1,10 @@
 <x-guest-layout>
+    <div class="absolute inset-x-0 top-0 h-16">
+        <p class="font-bold py-24 text-4xl text-center text-white">Bevestig wachtwoord</p>
+    </div>
+    
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+        {{ __('Dit is een beveiligd gedeelte van de applicatie. Bevestig uw wachtwoord voordat u doorgaat.') }}
     </div>
 
     <form method="POST" action="{{ route('password.confirm') }}">

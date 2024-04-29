@@ -1,5 +1,4 @@
 <x-app-layout>
-    <body>
         <!-- header slot tevinden in layout/app.blade.php -->
         <x-slot name="header" class="bg-transparent">
             <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
@@ -11,8 +10,15 @@
             <div class="max-w-7xl mx-auto px-8">
                 <div class="bg-transparent overflow-hidden">
                     <div class="p-6 text-black">
-                        <!-- user welkom -->
-                        <!-- <p class="pb-12">welkom terug {{Auth::user()->name}}</p> -->
+                        @if( session('error') ) 
+                                <div class="alert alert-error bg-white p-3 mb-3 text-[#ff0000] rounded-3xl">
+                                    {{ session('error') }}
+                                </div>
+                                @elseif( session('success'))
+                                    <div class="alert alert-success bg-white p-3 mb-3 text-[color:var(--prime-color)] rounded-3xl">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
 
                         <!-- meerkeuzevraag loop-->
                         @if(count($meerkeuzevragen) > 0)
@@ -22,9 +28,9 @@
                                     <h2 class="font-bold text-xl">{{ $vraag->vraag }}</h2>
                                     <div class="grid w-full grid-rows-2 grid-flow-col gap-4 bg-[color:var(--prime-color)] p-8 rounded-3xl">
                                         @foreach ($vraag->antwoorden as $antwoord)
-                                            <div class="bg-[color:var(--sec-color)] p-4 rounded-3xl">
-                                                <label>{{ $antwoord->AntwoordTekst }}
-                                                    <input type="checkbox" name="antwoord[{{ $antwoord->antwoordID }}]" value="{{ $antwoord->antwoordID }}"> 
+                                            <div class="block">
+                                            <input class="peer hidden" type="checkbox" id="antwoord[{{ $antwoord->antwoordID }}]" name="antwoord[{{ $antwoord->antwoordID }}]" value="{{ $antwoord->antwoordID }}"> 
+                                                <label for="antwoord[{{ $antwoord->antwoordID }}]" class="select-none block bg-[color:var(--sec-color)] rounded-3xl cursor-pointer p-4 font-bold text-white text-center transition-colors duration-200 ease-in-out peer-checked:bg-white peer-checked:text-[color:var(--prime-color)]">{{ $antwoord->AntwoordTekst }}
                                                 </label>
                                             </div>
                                         @endforeach
