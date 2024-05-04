@@ -16,18 +16,18 @@ class MeerkeuzeSeeder extends Seeder
     public function run()
     {
         Meerkeuzevragen::create([
-            'vraag' => 'hoe oud ben ik',
+            'vraag' => 'Welke van de volgende plaatsen grenzen aan Druten',
+            'puntenTeVerdienen' => 50,
+            'userID' => 2,
+        ]);
+        Meerkeuzevragen::create([
+            'vraag' => 'hoeveel inwoners heeft Druten',
             'puntenTeVerdienen' => 5,
             'userID' => 2,
         ]);
         Meerkeuzevragen::create([
-            'vraag' => 'hoe heet ik',
-            'puntenTeVerdienen' => 1,
-            'userID' => 2,
-        ]);
-        Meerkeuzevragen::create([
-            'vraag' => 'wie is de baas van de jumbo',
-            'puntenTeVerdienen' => 8,
+            'vraag' => 'Welke van de volgende winkels zijn in Druten',
+            'puntenTeVerdienen' => 80,
             'userID' => 2,
         ]);
     }

@@ -1,11 +1,24 @@
 <x-app-layout>
-  <head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  </head>
-  <html>
-<div id='calendar'></div>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<x-slot name="header" class="bg-transparent">
+  <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+      {{ __('Meerkeuzevraag') }}
+  </h2>
+</x-slot>
+
+<div class="py-6 w-full flex flex-col justify-center items-center pt-6 pt-0 bg-transparent">
+  <div class="w-full max-w-2xl mx-auto px-3">
+    <div class="bg-transparent overflow-hidden">
+      <div class="bg-white rounded-3xl p-6 " id='calendar'>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -57,5 +70,4 @@
     calendar.render();
   });
 </script>
-</html>
 </x-app-layout>

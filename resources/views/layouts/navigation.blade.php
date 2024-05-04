@@ -1,13 +1,12 @@
 <nav x-data="{ open: false }" class="">
 
     <!--top dropdown-->
-            <div class="z-50 flex items-center lg:hidden lg:hidden absolute">
+            <div class="z-50 flex items-center lg:hidden absolute">
                 <button @click="open = ! open"
-                    class="inline-flex m-6 items-center justify-center p-2 rounded-md text-black bg-white hover:text-[#FF0000] hover:bg-white focus:outline-none focus:bg-white transition duration-150 ease-in-out">
+                    class="inline-flex shadow-lg m-6 items-center justify-center p-2 rounded-md text-black bg-white hover:text-[#FF0000] hover:bg-white focus:outline-none focus:bg-white transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -15,8 +14,8 @@
             </div>
 
             <!-- Navigation dropdown menu -->
-            <div :class="{'block': open, 'hidden': ! open}" class="z-50 adsolute top-0">
-                <div class="pt-4 ml-6 pb-1 bg-white absolute lg:hidden rounded-md w-[50%] max-w-[250px] top-20">
+            <div :class="{'block': open, 'hidden': ! open}" class="adsolute top-0">
+                <div class="pt-4 ml-6 pb-1 bg-white z-[999] absolute lg:hidden rounded-md shadow-2xl w-[50%] max-w-[250px] top-20">
                     <div class="px-4 w-full">
                         <div class="font-medium text-base text-black"><p class="font-bold text-lg">{{ Auth::user()->name }}</p></div>
                         <div class="font-medium text-sm text-black"><p class="font-bold">Aantal punten: {{ Auth::user()->punten }}</p></div>
@@ -216,6 +215,10 @@
                     @role('user')
                     <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
                         {{ __('Nieuws Archief') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('nieuws.agenda')">
+                        {{ __('Nieuws Agenda') }}
                     </x-nav-link>
                     @endrole
 

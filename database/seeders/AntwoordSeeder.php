@@ -17,66 +17,66 @@ class AntwoordSeeder extends Seeder
     {
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 17,
-            'IsCorrect' => 0,
-        ]);
-        Antwoord::create([
-            'vraagID' => 1,
-            'AntwoordTekst' => 18,
+            'AntwoordTekst' => 'Boven-leeuwen',
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 19,
+            'AntwoordTekst' => 'Amsterdam',
             'IsCorrect' => 0,
         ]);
         Antwoord::create([
             'vraagID' => 1,
-            'AntwoordTekst' => 20,
+            'AntwoordTekst' => 'Afferden',
+            'IsCorrect' => 1,
+        ]);
+        Antwoord::create([
+            'vraagID' => 1,
+            'AntwoordTekst' => 'Puiflijk',
             'IsCorrect' => 0,
         ]);
 
 
         Antwoord::create([
             'vraagID' => 2,
-            'AntwoordTekst' => "guus",
-            'IsCorrect' => 0,
-        ]);
-        Antwoord::create([
-            'vraagID' => 2,
-            'AntwoordTekst' => "steven",
+            'AntwoordTekst' => "~19.500",
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 2,
-            'AntwoordTekst' => "amerika",
+            'AntwoordTekst' => "~190.500",
             'IsCorrect' => 0,
         ]);
         Antwoord::create([
             'vraagID' => 2,
-            'AntwoordTekst' => "sid",
+            'AntwoordTekst' => "15.147",
+            'IsCorrect' => 0,
+        ]);
+        Antwoord::create([
+            'vraagID' => 2,
+            'AntwoordTekst' => "~25.000",
             'IsCorrect' => 0,
         ]);
 
         Antwoord::create([
             'vraagID' => 3,
-            'AntwoordTekst' => "patryk perwenis",
-            'IsCorrect' => 0,
-        ]);
-        Antwoord::create([
-            'vraagID' => 3,
-            'AntwoordTekst' => "ton van veen",
+            'AntwoordTekst' => "Jumbo",
             'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 3,
-            'AntwoordTekst' => "jonathan joestar",
-            'IsCorrect' => 0,
+            'AntwoordTekst' => "Albert Heijn",
+            'IsCorrect' => 1,
         ]);
         Antwoord::create([
             'vraagID' => 3,
-            'AntwoordTekst' => "walter whote",
-            'IsCorrect' => 0,
+            'AntwoordTekst' => "Blokker",
+            'IsCorrect' => 1,
+        ]);
+        Antwoord::create([
+            'vraagID' => 3,
+            'AntwoordTekst' => "Shoeby",
+            'IsCorrect' => 1,
         ]);
     }
 }

@@ -5,10 +5,10 @@
     </h2>
 </x-slot>
 
-<div class="py-12 min-h-screen flex flex-col justify-center items-center pt-6 pt-0 bg-transparent">
+<div class="py-6 min-h-screen flex flex-col justify-center items-center bg-transparent">
     <div class="max-w-7xl mx-auto px-8">
         <div class="bg-transparent overflow-hidden">
-            <div class="p-6 text-black">
+            <div class="text-black">
                 <div class="alert alert-danger p-6 bold-xl text-[#FF0000]">
                         {{ session('error') }}
                 </div>

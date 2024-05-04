@@ -1,16 +1,8 @@
-<x-slot name="header">
-    <h2 class="font-semibold text-center text-4xl text-white leading-tight">
-        {{ __('Gebruiker maken') }}
-    </h2>
-</x-slot>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gebruiker maken</title>
-</head>
+<!-- <x-slot name="header" class="bg-transparent">
+        <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
+            {{ __('Gebruiker maken') }}
+        </h2>
+    </x-slot>
 <body>
     <h1>Maak account met rol</h1>
     
@@ -38,4 +30,4 @@
 
     <h2>Bestaande gebruikers</h2>
 </body>
-</html>
+</html> -->
