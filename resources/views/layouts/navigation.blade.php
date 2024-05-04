@@ -14,8 +14,8 @@
             </div>
 
             <!-- Navigation dropdown menu -->
-            <div :class="{'block': open, 'hidden': ! open}" class="z-50 adsolute top-0">
-                <div class="pt-4 ml-6 pb-1 bg-white absolute lg:hidden rounded-md shadow-2xl w-[50%] max-w-[250px] top-20">
+            <div :class="{'block': open, 'hidden': ! open}" class="adsolute top-0">
+                <div class="pt-4 ml-6 pb-1 bg-white z-[999] absolute lg:hidden rounded-md shadow-2xl w-[50%] max-w-[250px] top-20">
                     <div class="px-4 w-full">
                         <div class="font-medium text-base text-black"><p class="font-bold text-lg">{{ Auth::user()->name }}</p></div>
                         <div class="font-medium text-sm text-black"><p class="font-bold">Aantal punten: {{ Auth::user()->punten }}</p></div>
@@ -55,7 +55,7 @@
                         <img src="{{ URL::to('/') }}/images/Nieuws.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
 
-                    <x-nav-link :href="route('nieuws.kalender')" :active="request()->routeIs('nieuws.kalender')">
+                    <x-nav-link :href="route('nieuws.agenda')" :active="request()->routeIs('nieuws.agenda')">
                         <!-- {{ __('Nieuws Kalender') }} -->
                         <img src="{{ URL::to('/') }}/images/calendar.png" alt="Image" class="min-w-[30px]" width="50px" height="50px"/>
                     </x-nav-link>
@@ -215,6 +215,10 @@
                     @role('user')
                     <x-nav-link :href="route('nieuws.archief')" :active="request()->routeIs('nieuws.archief')">
                         {{ __('Nieuws Archief') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('nieuws.agenda')">
+                        {{ __('Nieuws Agenda') }}
                     </x-nav-link>
                     @endrole
 

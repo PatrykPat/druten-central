@@ -25,7 +25,7 @@
                             @foreach ($meerkeuzevragen as $vraag)
                                 <form method="POST" class="p-4 mb-6 border rounded-3xl bg-white flex flex-col justify-center items-center" action="{{ route('meerkeuzevragen.control') }}">
                                     @csrf
-                                    <h2 class="font-bold text-xl">{{ $vraag->vraag }}</h2>
+                                    <h2 class="font-bold mb-3 text-xl">{{ $vraag->vraag }}</h2>
                                     <div class="grid w-full grid-rows-2 grid-flow-col gap-4 bg-[color:var(--prime-color)] p-8 rounded-3xl">
                                         @foreach ($vraag->antwoorden as $antwoord)
                                             <div class="block">

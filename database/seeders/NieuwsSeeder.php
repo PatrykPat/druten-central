@@ -18,15 +18,11 @@ class NieuwsSeeder extends Seeder
     public function run()
     {
 
-        $file = file_get_contents(__DIR__ . '/images/druten-brand.jpg');
-        $image = Image::make($file);
-
         Nieuws::create([
             'user_iduser' => 2,
             'title' => "Er is brand",
             'beschrijving' => 'Er is een hele grootte brand bij de plaatstelijke albert hijen',
-            'datum' => Carbon::createFromDate(2025 - 04 - 03),
-            'image' => $image,
+            'datum' => Carbon::createFromDate('2024', '05', '13'),
             'postcode' => "4005BF",
         ]);
 
@@ -34,7 +30,7 @@ class NieuwsSeeder extends Seeder
             'user_iduser' => 2,
             'title' => "De dader van de brand",
             'beschrijving' => 'De dader van de brand bleek een jongen te zijn die werkzaam was voor de jumbo',
-            'datum' => Carbon::createFromDate(2025 - 04 - 03),
+            'datum' => Carbon::createFromDate('2024', '06', '03'),
             'postcode' => "4003KL",
         ]);
 
@@ -42,7 +38,7 @@ class NieuwsSeeder extends Seeder
             'user_iduser' => 2,
             'title' => "Rechtzaak brand",
             'beschrijving' => 'Er is nu een rechtzaak gestart tegen de brandstichter van de alber hijen',
-            'datum' => Carbon::createFromDate(2025 - 04 - 03),
+            'datum' => Carbon::createFromDate('2024', '05', '16'),
             'postcode' => "4006VF",
         ]);
     }

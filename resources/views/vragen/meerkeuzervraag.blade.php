@@ -13,17 +13,16 @@
             <div class="max-w-7xl mx-auto px-8">
                 <div class="bg-transparent overflow-hidden">
                     <div class="p-6 text-black">
-
-
-                            @if( session('error') ) 
-                                <div class="alert alert-error bg-white p-3 mb-3 text-[#ff0000] rounded-3xl">
-                                    {{ session('error') }}
+                        @if( session('error') ) 
+                            <div class="alert alert-error bg-white p-3 mb-3 text-[#ff0000] rounded-3xl">
+                                {{ session('error') }}
+                            </div>
+                            @elseif( session('success'))
+                                <div class="alert alert-success bg-white p-3 mb-3 text-[color:var(--prime-color)] rounded-3xl">
+                                    {{ session('success') }}
                                 </div>
-                                @elseif( session('success'))
-                                    <div class="alert alert-success bg-white p-3 mb-3 text-[color:var(--prime-color)] rounded-3xl">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
+                            @endif
+                            
                         <!-- meerkeuzevraag loop-->
                         @if(count($vragenMetAntwoorden) > 0)
                             @foreach ($vragenMetAntwoorden as $vraag)
