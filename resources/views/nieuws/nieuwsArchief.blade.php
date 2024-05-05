@@ -1,18 +1,17 @@
-<html> 
     <x-app-layout>
         <x-slot name="header" class="bg-transparent">
             <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
                 {{ __('Nieuws') }}
             </h2>
         </x-slot>
-        <body>
+        
             <div class="max-w-7xl mx-auto px-8 pb-12">
                 <!-- Dropdown-formulier om nieuwsitems te filteren -->
                 <form id="filterForm" action="{{ route('nieuws.filter') }}" class="m-6 bg-[color:var(--prime-color)] rounded-xl" method="GET">
                     @csrf
-                    <label class="p-3 text-white" for="userFilter">Select User:</label>
+                    <label class="p-3 text-white" for="userFilter">Kies een gebruiker:</label>
                     <select id="userFilter" name="user_postcode">
-                        <option value="{{ empty($selectedUserPostcode) ? 'selected' : '' }}">All Users</option>
+                        <option value="{{ empty($selectedUserPostcode) ? 'selected' : '' }}">Alle gebruikers</option>
                         <!-- foreach die alle gebruikers laat zien met de rol bedrijf -->
                         @foreach ($users as $user)
                             @foreach ($user->roles as $role)
@@ -59,12 +58,12 @@
                         </div>
                         @auth
                             @role('bedrijf')
-                                <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
+                                <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Bewerk</a>
 
                                 <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this news item?')">Delete</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this news item?')">Verwijder</button>
                                 </form>
                             @endrole
                         @endauth
@@ -74,10 +73,9 @@
 
                 @auth
                     @role('bedrijf')
-                        <h3><a href="/nieuws/create">Create</a></h3>
+                        <h3><a href="/create">Creëren</a></h3>
                     @endrole
                 @endauth
             </div>
-        </body>
+        
     </x-app-layout>
-</html>

@@ -21,7 +21,7 @@
                     <h4>Postcode: {{$nieuwsitem->postcode}}</h4>
                     @auth
                         @role('bedrijf')
-                            <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Edit</a>
+                            <a href="{{ route('nieuws.NieuwsEdit', $nieuwsitem->id) }}">Bewerk</a>
                             <form method="post" action="{{ route('nieuws.destroy', $nieuwsitem->id) }}" style="display: inline;">
                                 @csrf
                                 @method('DELETE')

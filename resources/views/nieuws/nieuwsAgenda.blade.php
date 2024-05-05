@@ -1,9 +1,7 @@
 <x-app-layout>
-<head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
 
 <x-slot name="header" class="bg-transparent">
   <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
@@ -64,7 +62,8 @@
             console.error("Error fetching news item:", textStatus, errorThrown);
           }
         });
-      }
+      },
+      locale: 'nl'
     });
 
     calendar.render();
