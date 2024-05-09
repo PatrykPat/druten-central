@@ -1,10 +1,9 @@
-    <x-app-layout>
+ <x-app-layout>
         <x-slot name="header" class="bg-transparent">
             <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
                 {{ __('Nieuws') }}
             </h2>
         </x-slot>
-        
             <div class="max-w-7xl mx-auto px-8 pb-12">
                 <!-- Dropdown-formulier om nieuwsitems te filteren -->
                 <form id="filterForm" action="{{ route('nieuws.filter') }}" class="m-6 bg-[color:var(--prime-color)] rounded-xl" method="GET">
@@ -77,5 +76,4 @@
                     @endrole
                 @endauth
             </div>
-        
     </x-app-layout>
