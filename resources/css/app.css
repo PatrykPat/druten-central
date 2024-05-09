@@ -38,3 +38,17 @@
     background: var(--sec-color);
     cursor: pointer;
   }
+
+/* Fullcalender styling */
+
+.fc-prev-button, .fc-next-button, .fc-today-button {
+  background-color: #4FB96F !important;
+  background-image: none !important;
+}
+
+.fc-prev-button:hover, .fc-next-button:hover, .fc-today-button:hover {
+  background-color: #1CEC6F !important;
+  background-image: none !important;
+}
+
+/* END Fullcalender styling */
