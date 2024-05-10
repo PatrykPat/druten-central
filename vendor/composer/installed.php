@@ -3,11 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< Updated upstream
-        'reference' => '6125f0fc97f4078ec89e5c3a4b76b970c583b16f',
-=======
-        'reference' => '528cabe8a197118cbef28ed4fddc3dbe29d356b7',
->>>>>>> Stashed changes
+        'reference' => '212c0f6206cc9c2b96dcae6563ed4ace83761f35',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -434,11 +430,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< Updated upstream
-            'reference' => '6125f0fc97f4078ec89e5c3a4b76b970c583b16f',
-=======
-            'reference' => '528cabe8a197118cbef28ed4fddc3dbe29d356b7',
->>>>>>> Stashed changes
+            'reference' => '212c0f6206cc9c2b96dcae6563ed4ace83761f35',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1028,18 +1020,18 @@
             'dev_requirement' => true,
         ),
         'spatie/flare-client-php' => array(
-            'pretty_version' => '1.4.4',
-            'version' => '1.4.4.0',
-            'reference' => '17082e780752d346c2db12ef5d6bee8e835e399c',
+            'pretty_version' => '1.5.1',
+            'version' => '1.5.1.0',
+            'reference' => 'e27977d534eefe04c154c6fd8460217024054c05',
             'type' => 'library',
             'install_path' => __DIR__ . '/../spatie/flare-client-php',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
         'spatie/ignition' => array(
-            'pretty_version' => '1.14.0',
-            'version' => '1.14.0.0',
-            'reference' => '80385994caed328f6f9c9952926932e65b9b774c',
+            'pretty_version' => '1.14.1',
+            'version' => '1.14.1.0',
+            'reference' => 'c23cc018c5f423d2f413b99f84655fceb6549811',
             'type' => 'library',
             'install_path' => __DIR__ . '/../spatie/ignition',
             'aliases' => array(),
