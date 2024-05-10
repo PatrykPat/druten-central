@@ -55,6 +55,10 @@ class CouponController extends Controller
     }
     public function send(Request $request)
     {
+        /**
+         * @param string $happiness
+         * @return Integer
+         */
         //check of de gegevens voldoen aan de vereisten
         $validatedData = $request->validate([
             'omschrijving' => 'required|string',
