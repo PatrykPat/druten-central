@@ -1,22 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
-            {{ __('Meerkeuzevragen') }}
+            {{ __('Maak meerkeuzevraag') }}
         </h2>
     </x-slot>
-            <x-slot name="header">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Maak meerkeuzevraag') }}
-                </h2>
-            </x-slot>
+
             <div class="alert alert-error">
                 {{ session('error') }}
             </div>
 
-            <div class="p-4 mb-6 border rounded-3xl bg-white flex flex-col justify-center items-center">
+            <div class="py-12">
+        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl ">
                 <form method="POST"  action="{{ route('verwerk_vraag') }}">
                 @csrf
-
+                <div class="flex flex-col ">
                     <label for="vraag">Vraag:</label>
                         <input type="text" id="vraag" name="vraag" required>
                         <br>
@@ -43,7 +42,14 @@
                     <label for="punten">hoeveel punten moet de gebruiker krijgen:</label>
 
                     <input type="number" id="punten" name="punten" required><br>
-                    <input type="submit" value="Verstuur">
+                        <div class="w-full flex flex-colm justify-center items-center">
+	                        <button class="text-white w-[90%] justify-center  w-full relative inset-x-0 bottom-0 h-12 bg-[var(--prime-color)] border-black rounded-3xl" type="submit">verstuur</button>
+                        </div> 
+                    </div>
                 </form>
             </div>
+            </div>
+            </div>
+            </div>
+
 </x-app-layout>
