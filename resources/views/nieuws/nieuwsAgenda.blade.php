@@ -5,7 +5,7 @@
 
 <x-slot name="header" class="bg-transparent">
   <h2 class="font-semibold bg-transparent text-center text-4xl text-white leading-tight">
-      {{ __('Meerkeuzevraag') }}
+      {{ __('Agenda') }}
   </h2>
 </x-slot>
 
