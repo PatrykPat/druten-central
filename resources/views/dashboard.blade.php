@@ -6,10 +6,10 @@
             </h2>
         </x-slot>
         
-        <div class="py-12 min-h-screen flex flex-col justify-center items-center pt-6 pt-0 bg-transparent">
-            <div class="max-w-7xl mx-auto px-8">
-                <div class="bg-transparent overflow-hidden">
-                    <div class="p-6 text-black">
+        <div class="py-12 w-full">
+        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
                         @if( session('error') ) 
                                 <div class="alert alert-error bg-white p-3 mb-3 text-[#ff0000] rounded-3xl">
                                     {{ session('error') }}
@@ -37,11 +37,11 @@
                                     </div>
                                     <input type="hidden" name="vraag_id" value="{{ $vraag->id }}">
 
-                                <div class="m-4 w-full flex flex-col justify-center items-center">
-                                    <button class="text-white w-[90%] justify-center  w-full relative inset-x-0 bottom-0 h-12 bg-[var(--prime-color)] border-black rounded-3xl" type="submit">Controleer antwoord</button>
-                                </div>        
-                            </form>
-                        @endforeach
+                                    <div class="m-4 w-full flex flex-col justify-center items-center">
+                                        <button class="text-white w-[90%] justify-center  w-full relative inset-x-0 bottom-0 h-12 bg-[var(--prime-color)] border-black rounded-3xl" type="submit">Controleer antwoord</button>
+                                    </div>        
+                                </form>
+                            @endforeach
 
                         <!--melding dat er geen berichten zijn-->
                     @else
