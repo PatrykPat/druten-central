@@ -9,6 +9,7 @@
   </h2>
 </x-slot>
 
+<!-- Nieuws pop-up -->
 <div id="popup" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex justify-center items-center">
   <div class="bg-white rounded-lg p-8 max-w-md">
     <h2 class="text-2xl font-semibold mb-4" id="popupTitle"></h2>
@@ -18,6 +19,7 @@
   </div>
 </div>
 
+<!-- De agenda -->
 <div class="py-6 w-full flex flex-col justify-center items-center pt-6 pt-0 bg-transparent">
   <div class="w-full max-w-2xl mx-auto px-3">
     <div class="bg-transparent overflow-hidden">
@@ -70,14 +72,14 @@
       });
     },
     locale: 'nl',
-    buttonText: { // Customize button text
+    buttonText: { // Customize button tekst
       today: 'Vandaag'
     }
   });
 
     calendar.render();
 
-    // Close popup when close button is clicked
+    // Sluit pop-up wanneer de sluit knop is geklikt
     closePopup.addEventListener('click', function() {
       popup.classList.add('hidden');
     });
