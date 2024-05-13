@@ -30,7 +30,7 @@ class FeedbackvragenController extends Controller
                 ->where('userhasvragen.User_idUser', auth()->user()->id);
         })->get();
 
-        return view('vragen\Feedbackvragen', compact('vragen'));
+        return view('vragen\Feedbackvragen', compact('vragen', 'vandaag'));
     }
 
     public function showAlleVragen()
@@ -38,8 +38,11 @@ class FeedbackvragenController extends Controller
         $vragen = Feedbackvragen::all();
         $vandaag = Carbon::today();
 
-
         return view('vragen\Feedbackvragen', compact('vragen'));
+    }
+    
+    public function averageRating(){
+        $avgRating = Feedbackvragen::avg('rating');
     }
 
     public function showAnt()
@@ -48,9 +51,10 @@ class FeedbackvragenController extends Controller
         $users = User::all();
         $roles = Role::all();
         $vandaag = Carbon::today();
+        $ratings = UserHasVragen::all('rating');
         $antwoorden = UserHasVragen::with('gebruiker')->get();
         $vragen = Feedbackvragen::orderBy('id', 'desc')->get();
-        return view('Feedbackantwoorden', compact('users', 'vragen', 'antwoorden'));
+        return view('Feedbackantwoorden', compact('users', 'vandaag', 'ratings', 'vragen', 'antwoorden'));
     }
 
     public function verwerkantwoord(Request $request)
