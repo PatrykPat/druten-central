@@ -21,6 +21,7 @@ class FeedbackvragenController extends Controller
 {
     public function show()
     {
+        $vandaag = Carbon::today();
         //haal allle vragen op die de gebruiker nog niet heeft beantwoord
         $vragen = Feedbackvragen::whereNotExists(function ($query) {
             $query->select(DB::raw(1))
@@ -35,6 +36,8 @@ class FeedbackvragenController extends Controller
     public function showAlleVragen()
     {
         $vragen = Feedbackvragen::all();
+        $vandaag = Carbon::today();
+
 
         return view('vragen\Feedbackvragen', compact('vragen'));
     }
@@ -44,6 +47,7 @@ class FeedbackvragenController extends Controller
         //laat zien wat elke gebruiker heeft beantwoord op een feedbackvraag
         $users = User::all();
         $roles = Role::all();
+        $vandaag = Carbon::today();
         $antwoorden = UserHasVragen::with('gebruiker')->get();
         $vragen = Feedbackvragen::orderBy('id', 'desc')->get();
         return view('Feedbackantwoorden', compact('users', 'vragen', 'antwoorden'));
@@ -62,14 +66,19 @@ class FeedbackvragenController extends Controller
         $vraagId = $request->input('vraag_id');
         $antwoord = $request->input('antwoord');
         $rating = $request->input('rating');
+        $begindatum = $request->input('begindatum');
+        $einddatum = $request->input('einddatum');
+
         // maak nieuwe rij aan 
         UserHasVragen::create([
             'User_idUser' => $userId,
             'Vragen_idVragen' => $vraagId,
             'antwoord' => $antwoord,
-            'rating' => $rating
+            'rating' => $rating,
+            'begon op' => $begindatum,
+            'eindigt op' => $einddatum
         ]);
-        // telt de punten die bij de rvaag horen bij het totaal van de user op
+        // telt de punten die bij de vraag horen bij het totaal van de user op
         $vraag = Feedbackvragen::find($vraagId);
         $puntenTeVerdienen = $vraag->puntenTeVerdienen;
         $gebruiker = User::find($userId);
@@ -113,6 +122,8 @@ class FeedbackvragenController extends Controller
             'puntenTeVerdienen' => 'required|numeric',
             'title' => 'required|string',
             'beschrijving' => 'required|string',
+            'begindatum' => 'required|date',
+            'einddatum' => 'required|date'
         ]);
         //maakt nieuwe feedbackvraag aan en vult de kolommen met de gegevens
         $feedbackvragen = new feedbackvragen();
@@ -120,6 +131,8 @@ class FeedbackvragenController extends Controller
         $feedbackvragen->beschrijving = $validatedData['beschrijving'];
         $feedbackvragen->title = $validatedData['title'];
         $feedbackvragen->puntenTeVerdienen = $validatedData['puntenTeVerdienen'];
+        $feedbackvragen->begindatum = $validatedData['begindatum'];
+        $feedbackvragen->einddatum = $validatedData['einddatum'];
         $feedbackvragen->user_userid = $user->id;
 
         $feedbackvragen->save();

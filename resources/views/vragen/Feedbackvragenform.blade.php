@@ -25,6 +25,14 @@
                 <label for="puntenTeVerdienen">Punten te verdienen:</label><br>
                 <input type="number" id="puntenTeVerdienen" name="puntenTeVerdienen"><br><br>
 
+                <label for="Begindatum">Begin datum</label><br>
+                <input type="date" id="begindatum" name="begindatum"><br><br>
+
+                <label for="Einddatum">Eind datum</label><br>
+                <input type="date" id="einddatum" name="einddatum"><br><br>
+
+
+
                 <div class="m-4 w-full flex flex-colm justify-center items-center">
 	<button class="text-white w-[90%] justify-center  w-full relative inset-x-0 bottom-0 h-12 bg-[var(--prime-color)] border-black rounded-3xl" type="submit">
 

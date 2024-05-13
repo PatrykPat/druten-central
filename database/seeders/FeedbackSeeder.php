@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
+use App\Models\Coupon;
 use App\Models\Feedbackvragen;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,18 +22,24 @@ class FeedbackSeeder extends Seeder
             'beschrijving' => 'wat vind je van druten',
             'puntenTeVerdienen' => 2,
             'user_userid' => 4,
+            'begindatum' => Carbon::createFromDate('2024', '05', '13'),
+            'einddatum' => Carbon::createFromDate('2024', '05', '13')
         ]);
         feedbackvragen::create([
             'title' => 'vraag 2',
             'beschrijving' => 'wat kan er beter aan de jumbo',
             'puntenTeVerdienen' => 5,
             'user_userid' => 4,
+            'begindatum' => Carbon::createFromDate('2024', '05', '13'),
+            'einddatum' => Carbon::createFromDate('2024', '05', '13')
         ]);
         feedbackvragen::create([
             'title' => 'vraag 3',
             'beschrijving' => 'waarom is de jumbo zo mooi',
             'puntenTeVerdienen' => 1,
             'user_userid' => 4,
+            'begindatum' => Carbon::createFromDate('2024', '05', '13'),
+            'einddatum' => Carbon::createFromDate('2024', '05', '13')
         ]);
 
         feedbackvragen::create([
@@ -39,12 +47,16 @@ class FeedbackSeeder extends Seeder
             'beschrijving' => 'wat zou de plus kunnen doen om beter te zijn dan de jumbo',
             'puntenTeVerdienen' => 5,
             'user_userid' => 5,
+            'begindatum' => Carbon::createFromDate('2024', '05', '13'),
+            'einddatum' => Carbon::createFromDate('2024', '05', '13')
         ]);
         feedbackvragen::create([
             'title' => 'vraag 5',
             'beschrijving' => 'wat kan er beter aan de plus',
             'puntenTeVerdienen' => 1,
             'user_userid' => 5,
+            'begindatum' => Carbon::createFromDate('2024', '05', '13'),
+            'einddatum' => Carbon::createFromDate('2024', '05', '13')
         ]);
     }
 }

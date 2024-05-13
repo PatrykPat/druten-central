@@ -17,9 +17,12 @@ return new class extends Migration {
             $table->string("title");
             $table->string("beschrijving");
             $table->integer("puntenTeVerdienen");
-            $table->unsignedBigInteger('user_userid'); // Define the column before the foreign key
-            $table->foreign('user_userid')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_userid');
+            $table->date('Begindatum');
+            $table->date('Einddatum');
             $table->timestamps();
+            $table->foreign('user_userid')->references('id')->on('users')->onDelete('cascade');
+            
         });
     }
 
