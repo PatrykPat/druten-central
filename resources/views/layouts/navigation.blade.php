@@ -42,6 +42,12 @@
                     
                     @endrole
                     @role('bedrijf')
+                    <x-nav-link :href="route('coupon.read')" :active="request()->routeIs('dashboard')">
+                        {{ __('beheer coupons') }}
+                    </x-nav-link>
+                    @endrole
+
+                    @role('bedrijf')
                     <x-nav-link :href="route('meerkeuzevragen.show')" :active="request()->routeIs('dashboard')">
                         {{ __('Create meerkeuze vraag') }}
                     </x-nav-link>
